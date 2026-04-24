@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard - SARMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-primary px-4 d-flex justify-content-between">
+        <span class="navbar-brand fw-bold">🎒 Student Dashboard</span>
+        <div>
+            <span class="text-white me-3">Welcome, {{ user }}</span>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <!-- Nav Tabs -->
+        <ul class="nav nav-tabs mb-4" id="dashTabs">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#attendance">Attendance</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#marks">Marks</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#subjects">Subjects</button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- Attendance Tab -->
+            <div class="tab-pane fade show active" id="attendance">
+                <h5 class="mb-3">My Attendance</h5>
+                <table class="table table-bordered table-hover bg-white">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Subject Code</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="attendanceBody">
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Marks Tab -->
+            <div class="tab-pane fade" id="marks">
+                <h5 class="mb-3">My Marks</h5>
+                <table class="table table-bordered table-hover bg-white">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Subject Code</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marksBody">
+                        <tr>
+                            <td colspan="2" class="text-center text-muted">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Subjects Tab -->
+            <div class="tab-pane fade" id="subjects">
+                <h5 class="mb-3">My Subjects</h5>
+                <table class="table table-bordered table-hover bg-white">
+                    <thead class="table-warning">
+                        <tr>
+                            <th>Subject Code</th>
+                            <th>Subject Name</th>
+                            <th>Semester</th>
+                            <th>Teacher ID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="subjectsBody">
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function loadData() {
+            const res = await fetch("/student/data");
+            if (!res.ok) { window.location.href = "/"; return; }
+            const data = await res.json();
+
+            // Attendance
+            const aBody = document.getElementById("attendanceBody");
+            aBody.innerHTML = data.attendance.length
+                ? data.attendance.map(a => `<tr>
+                <td>${a.subject_code}</td>
+                <td>${a.date}</td>
+                <td><span class="badge ${a.status === 'Present' ? 'bg-success' : 'bg-danger'}">${a.status}</span></td>
+              </tr>`).join("")
+                : `<tr><td colspan="3" class="text-center text-muted">No attendance records</td></tr>`;
+
+            // Marks
+            const mBody = document.getElementById("marksBody");
+            mBody.innerHTML = data.marks.length
+                ? data.marks.map(m => `<tr><td>${m.subject_code}</td><td>${m.marks}</td></tr>`).join("")
+                : `<tr><td colspan="2" class="text-center text-muted">No marks available</td></tr>`;
+
+            // Subjects
+            const sBody = document.getElementById("subjectsBody");
+            sBody.innerHTML = data.subjects.length
+                ? data.subjects.map(s => `<tr><td>${s.subject_code}</td><td>${s.subject_name}</td><td>${s.semester}</td><td>${s.teacher_id}</td></tr>`).join("")
+                : `<tr><td colspan="4" class="text-center text-muted">No subjects found</td></tr>`;
+        }
+
+        loadData();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - SARMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-danger px-4 d-flex justify-content-between">
+        <span class="navbar-brand fw-bold">🛠️ Admin Dashboard</span>
+        <div>
+            <span class="text-white me-3">Welcome, {{ user }}</span>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <ul class="nav nav-tabs mb-4">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#addStudent">Add Student</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#addTeacher">Add Teacher</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#addSubject">Assign Subject</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#viewAll">View All</button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- Add Student -->
+            <div class="tab-pane fade show active" id="addStudent">
+                <div class="card shadow-sm" style="max-width:500px">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Add Student</h5>
+                        <div id="studentMsg"></div>
+                        <form id="studentForm">
+                            <div class="mb-3">
+                                <label class="form-label">Student ID</label>
+                                <input type="text" id="s_id" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input type="text" id="s_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Department</label>
+                                <input type="text" id="s_dept" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Semester</label>
+                                <input type="number" id="s_sem" class="form-control" min="1" max="8" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100">Add Student</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Teacher -->
+            <div class="tab-pane fade" id="addTeacher">
+                <div class="card shadow-sm" style="max-width:500px">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Add Teacher</h5>
+                        <div id="teacherMsg"></div>
+                        <form id="teacherForm">
+                            <div class="mb-3">
+                                <label class="form-label">Teacher ID</label>
+                                <input type="text" id="t_id" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input type="text" id="t_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Department</label>
+                                <input type="text" id="t_dept" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100">Add Teacher</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Subject -->
+            <div class="tab-pane fade" id="addSubject">
+                <div class="card shadow-sm" style="max-width:500px">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Assign Subject</h5>
+                        <div id="subjectMsg"></div>
+                        <form id="subjectForm">
+                            <div class="mb-3">
+                                <label class="form-label">Subject Code</label>
+                                <input type="text" id="sub_code" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Subject Name</label>
+                                <input type="text" id="sub_name" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Semester</label>
+                                <input type="number" id="sub_sem" class="form-control" min="1" max="8" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Teacher ID</label>
+                                <input type="text" id="sub_teacher" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100">Assign Subject</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All -->
+            <div class="tab-pane fade" id="viewAll">
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <h5>Students</h5>
+                        <table class="table table-bordered table-sm bg-white">
+                            <thead class="table-danger">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Dept</th>
+                                    <th>Sem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsBody"></tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Teachers</h5>
+                        <table class="table table-bordered table-sm bg-white">
+                            <thead class="table-danger">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Dept</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teachersBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelector('[data-bs-target="#viewAll"]').addEventListener('shown.bs.tab', loadAll);
+
+        async function loadAll() {
+            const [sRes, tRes] = await Promise.all([fetch("/admin/students"), fetch("/admin/teachers")]);
+            const students = await sRes.json();
+            const teachers = await tRes.json();
+
+            document.getElementById("studentsBody").innerHTML = students.length
+                ? students.map(s => `<tr><td>${s.student_id}</td><td>${s.name}</td><td>${s.department}</td><td>${s.semester}</td></tr>`).join("")
+                : `<tr><td colspan="4" class="text-muted text-center">No students</td></tr>`;
+
+            document.getElementById("teachersBody").innerHTML = teachers.length
+                ? teachers.map(t => `<tr><td>${t.teacher_id}</td><td>${t.name}</td><td>${t.department}</td></tr>`).join("")
+                : `<tr><td colspan="3" class="text-muted text-center">No teachers</td></tr>`;
+        }
+
+        function showMsg(id, msg, success) {
+            const el = document.getElementById(id);
+            el.innerHTML = `<div class="alert alert-${success ? 'success' : 'danger'} py-2">${msg}</div>`;
+            setTimeout(() => el.innerHTML = "", 3000);
+        }
+
+        document.getElementById("studentForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const res = await fetch("/admin/add_student", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    student_id: document.getElementById("s_id").value,
+                    name: document.getElementById("s_name").value,
+                    department: document.getElementById("s_dept").value,
+                    semester: document.getElementById("s_sem").value
+                })
+            });
+            const data = await res.json();
+            showMsg("studentMsg", res.ok ? data.message : data.error, res.ok);
+            if (res.ok) this.reset();
+        });
+
+        document.getElementById("teacherForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const res = await fetch("/admin/add_teacher", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    teacher_id: document.getElementById("t_id").value,
+                    name: document.getElementById("t_name").value,
+                    department: document.getElementById("t_dept").value
+                })
+            });
+            const data = await res.json();
+            showMsg("teacherMsg", res.ok ? data.message : data.error, res.ok);
+            if (res.ok) this.reset();
+        });
+
+        document.getElementById("subjectForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const res = await fetch("/admin/add_subject", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    subject_code: document.getElementById("sub_code").value,
+                    subject_name: document.getElementById("sub_name").value,
+                    semester: document.getElementById("sub_sem").value,
+                    teacher_id: document.getElementById("sub_teacher").value
+                })
+            });
+            const data = await res.json();
+            showMsg("subjectMsg", res.ok ? data.message : data.error, res.ok);
+            if (res.ok) this.reset();
+        });
+    </script>
+
+</body>
+
+</html>

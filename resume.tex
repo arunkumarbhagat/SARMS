@@ -1,0 +1,161 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[top=0.45in, left=0.5in, right=0.5in, bottom=0.4in]{geometry}
+\usepackage{paracol}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0pt}
+
+% ── Colours ──────────────────────────────────────────────
+\definecolor{accent}{RGB}{20,60,120}
+\definecolor{darkgray}{RGB}{80,80,80}
+
+% ── Hyperlink style ──────────────────────────────────────
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+% ── Section heading style ────────────────────────────────
+\titleformat{\section}
+  {\color{accent}\bfseries\normalsize}
+  {}{0em}{\MakeUppercase}[\color{accent}\titlerule]
+\titlespacing{\section}{0pt}{6pt}{4pt}
+
+% ── List settings ────────────────────────────────────────
+\setlist[itemize]{
+  noitemsep, topsep=2pt, partopsep=0pt,
+  leftmargin=1.2em, label={\color{accent}\tiny\textbullet}
+}
+
+\begin{document}
+\pagestyle{empty}
+
+% ════════════════════════════════════════════════════════
+%  HEADER
+% ════════════════════════════════════════════════════════
+\begin{minipage}[c]{0.20\textwidth}
+  \includegraphics[width=3.0cm, height=3.0cm, keepaspectratio]{aaa.png}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.77\textwidth}
+  {\LARGE\bfseries\color{accent} Arun Kumar Bhagat}\\[3pt]
+  {\small\color{darkgray} B.E. Computer Science Engineering (AI \& ML) $\cdot$ Chandigarh University}\\[5pt]
+  \small
+  \textbf{Location:} Rewari, Saran, Bihar -- 841213 \quad
+  \textbf{Phone:} +91 8102581574 \\[3pt]
+  \textbf{Email:} \href{mailto:arunkumarbhagat1245@gmail.com}{arunkumarbhagat1245@gmail.com} \\[2pt]
+  \textbf{LinkedIn:} \href{https://www.linkedin.com/in/arun-kumar-bhagat-57b083291/}{linkedin.com/in/Arun-Kumar-Bhagat} \quad
+  \textbf{GitHub:} \href{https://github.com/arunkumarbhagat}{github.com/Arun-Kumar-Bhagat}
+\end{minipage}
+
+\vspace{5pt}
+\noindent{\color{accent}\rule{\textwidth}{1.2pt}}
+\vspace{2pt}
+
+% ════════════════════════════════════════════════════════
+%  TWO-COLUMN BODY
+% ════════════════════════════════════════════════════════
+\columnratio{0.34}
+\setlength{\columnsep}{18pt}
+\begin{paracol}{2}
+
+% ── LEFT ─────────────────────────────────────────────────
+
+\section*{Career Objective}
+\small
+Computer Science Engineering student at Chandigarh University with hands-on experience building full-stack web applications using Python, Flask, MongoDB, and REST APIs. Passionate about writing clean, scalable code and delivering end-to-end software solutions. Seeking a Software Developer role to apply strong development, problem-solving, and testing skills in a collaborative engineering team.
+
+\section*{Technical Skills}
+\small
+\begin{tabular}{@{}ll}
+  \textbf{Languages}  & C++, Python, JavaScript, SQL \\[2pt]
+  \textbf{Backend}    & Flask, REST APIs, Node.js \\[2pt]
+  \textbf{Databases}  & MongoDB, MySQL \\[2pt]
+  \textbf{Tools}      & Git, Linux, Power BI \\[2pt]
+  \textbf{CS Core}    & DSA, OOP, OS \\[2pt]
+  \textbf{Testing}    & Pytest, Selenium WebDriver \\
+\end{tabular}
+
+\section*{Interpersonal Skills}
+\small
+Problem Solving \textbullet\ Analytical Thinking \textbullet\ Team Collaboration \textbullet\ Communication \textbullet\ Quick Learning
+
+\section*{Certifications}
+\small
+\begin{itemize}
+  \item IT Specialist -- Data Analytics\\{\footnotesize\color{darkgray}Pearson}
+  \item Data Visualization with Python\\{\footnotesize\color{darkgray}IBM}
+  \item Introduction to NoSQL\\{\footnotesize\color{darkgray}IBM}
+  \item Power BI for Beginners\\{\footnotesize\color{darkgray}Microsoft}
+\end{itemize}
+
+\section*{Achievements}
+\small
+\begin{itemize}
+  \item 2nd Place -- University-level Treasure Hunt
+  \item Active participant in Aptitude \& coding competitions
+\end{itemize}
+
+\section*{Interests}
+\small
+Competitive Programming \textbullet\ Chess \textbullet\ Speed Cubing \textbullet\ Fitness
+
+\section*{Personal Details}
+\small
+\begin{tabular}{@{}ll}
+  D.O.B.    & 23 Nov 2003 \\[2pt]
+  Languages & Hindi, English \\[2pt]
+  Father    & Mr. Rajesh Kumar Bhagat \\[2pt]
+  Mother    & Mrs. Asha Devi \\
+\end{tabular}
+
+% ── RIGHT ────────────────────────────────────────────────
+\switchcolumn
+
+\section*{Education}
+\small
+\begin{tabular}{@{} p{0.60\linewidth} r @{}}
+  \textbf{Chandigarh University, Punjab} & \\
+  B.E. CSE -- AI \& ML & \textit{2023 -- Present} \\
+  CGPA: 7.25 & \\[4pt]
+  \textbf{Rajendra College, Chapra} & \\
+  Class XII -- BSED & \textit{2022 \;|\; 83\%} \\[4pt]
+  \textbf{Indira Gandhi High School, Rewari} & \\
+  Class X -- BSED & \textit{2020 \;|\; 79\%} \\
+\end{tabular}
+
+\section*{Projects}
+
+{\small\textbf{SARMS -- Student Attendance \& Result Management System}
+\hfill{\footnotesize\color{darkgray}2025}\\
+{\footnotesize\color{darkgray}\textit{Python, Flask, MongoDB, JavaScript, Pytest, Selenium}}}
+\begin{itemize}
+  \item Built a role-based web application with Admin, Teacher, and Student dashboards for managing attendance and academic results
+  \item Implemented REST APIs with session-based authentication and role-level access control
+  \item Authored 73 black-box \& white-box test cases and automated UI tests with Selenium WebDriver
+\end{itemize}
+
+\vspace{3pt}
+{\small\textbf{SRTBS -- Simple Railway Ticket Booking System}
+\hfill{\footnotesize\color{darkgray}2026}\\
+{\footnotesize\color{darkgray}\textit{Python, Flask, MongoDB, JavaScript, Pytest, Selenium}}}
+\begin{itemize}
+  \item Developed a full-stack booking platform with train search, multi-passenger booking, PNR generation, and real-time seat availability
+  \item Designed MongoDB schemas with automatic fare calculation and seat deduction on confirmation
+  \item Built admin panel for train management with complete black-box, white-box \& Selenium test coverage
+\end{itemize}
+
+\vspace{3pt}
+{\small\textbf{IPL Match Win Predictor}
+\hfill{\footnotesize\color{darkgray}2026}\\
+{\footnotesize\color{darkgray}\textit{Python, Scikit-learn, Random Forest, Streamlit}}}
+\begin{itemize}
+  \item Trained a Random Forest classifier to predict IPL match outcomes with feature engineering and probability calibration
+  \item Deployed an interactive prediction app via Streamlit for real-time match scenario simulation
+\end{itemize}
+
+\end{paracol}
+
+\end{document}

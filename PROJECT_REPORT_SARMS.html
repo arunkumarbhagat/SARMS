@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SARMS – Project Report</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            color: #222;
+            font-size: 14px;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 30px auto 60px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
+            overflow: hidden;
+        }
+
+        /* Cover */
+        .cover {
+            background: linear-gradient(135deg, #1a3a1a 0%, #1e8449 60%, #27ae60 100%);
+            color: #fff;
+            text-align: center;
+            padding: 70px 40px 60px;
+        }
+
+        .cover .logo {
+            font-size: 56px;
+            margin-bottom: 14px;
+        }
+
+        .cover h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .cover h2 {
+            font-size: 18px;
+            font-weight: 300;
+            opacity: .85;
+            margin-bottom: 10px;
+        }
+
+        .cover p {
+            font-size: 13px;
+            opacity: .65;
+            margin-bottom: 30px;
+        }
+
+        .cover .meta {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .cover .mi {
+            background: rgba(255, 255, 255, 0.13);
+            border-radius: 8px;
+            padding: 12px 22px;
+        }
+
+        .cover .mi .lbl {
+            font-size: 11px;
+            opacity: .7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover .mi .val {
+            font-size: 15px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        /* Body */
+        .body {
+            padding: 48px 52px 64px;
+        }
+
+        /* TOC */
+        .toc {
+            background: #f0faf4;
+            border-left: 5px solid #27ae60;
+            border-radius: 0 8px 8px 0;
+            padding: 24px 28px;
+            margin-bottom: 44px;
+        }
+
+        .toc h3 {
+            color: #1e8449;
+            font-size: 14px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toc ol {
+            margin-left: 20px;
+            line-height: 2.3;
+        }
+
+        .toc a {
+            color: #1e8449;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        /* Headings */
+        h2.sec {
+            font-size: 20px;
+            color: #1e8449;
+            border-left: 5px solid #27ae60;
+            padding-left: 14px;
+            margin: 44px 0 16px;
+        }
+
+        h3.sub {
+            font-size: 15px;
+            color: #2c3e50;
+            margin: 26px 0 10px;
+            border-bottom: 2px solid #eafaf1;
+            padding-bottom: 5px;
+        }
+
+        h4.sub2 {
+            font-size: 13px;
+            color: #555;
+            margin: 16px 0 8px;
+            font-weight: 700;
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 12px;
+            color: #444;
+        }
+
+        ul,
+        ol {
+            margin: 8px 0 14px 24px;
+            line-height: 2.1;
+            color: #444;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        th {
+            background: #1e8449;
+            color: #fff;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+
+        tr:nth-child(even) td {
+            background: #f6fdf8;
+        }
+
+        tr:hover td {
+            background: #eafaf1;
+        }
+
+        tfoot td {
+            background: #2c3e50 !important;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Code */
+        pre {
+            background: #1e2a38;
+            color: #a8d8ea;
+            padding: 18px 22px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            overflow-x: auto;
+            margin: 12px 0 20px;
+            line-height: 1.7;
+        }
+
+        code {
+            background: #eafaf1;
+            color: #1e8449;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 12.5px;
+            font-family: monospace;
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .info-grid table th {
+            background: #2c3e50;
+        }
+
+        /* Stat cards */
+        .stat-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 130px;
+            border-radius: 10px;
+            padding: 18px 16px;
+            text-align: center;
+        }
+
+        .stat .n {
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .stat .l {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .stat.green {
+            background: #eafaf1;
+            color: #1e8449;
+        }
+
+        .stat.blue {
+            background: #eaf4fb;
+            color: #1a5276;
+        }
+
+        .stat.orange {
+            background: #fef9e7;
+            color: #e67e22;
+        }
+
+        .stat.dark {
+            background: #eaecee;
+            color: #2c3e50;
+        }
+
+        .stat.red {
+            background: #fdecea;
+            color: #c0392b;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin: 2px;
+        }
+
+        .badge.green {
+            background: #1e8449;
+            color: #fff;
+        }
+
+        .badge.blue {
+            background: #1a5276;
+            color: #fff;
+        }
+
+        .badge.orange {
+            background: #e67e22;
+            color: #fff;
+        }
+
+        .badge.red {
+            background: #c0392b;
+            color: #fff;
+        }
+
+        .badge.gray {
+            background: #7f8c8d;
+            color: #fff;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 36px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- COVER -->
+        <div class="cover">
+            <div class="logo">🎓</div>
+            <h1>SARMS</h1>
+            <h2>Student Attendance &amp; Result Management System</h2>
+            <p>Full-Stack University Portal — Detailed Project Report</p>
+            <div class="meta">
+                <div class="mi">
+                    <div class="lbl">Backend</div>
+                    <div class="val">Python Flask</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Database</div>
+                    <div class="val">MongoDB</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Frontend</div>
+                    <div class="val">Bootstrap 5 + JS</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">User Roles</div>
+                    <div class="val">Student / Teacher / Admin</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Report Date</div>
+                    <div class="val">April 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body">
+
+            <!-- TOC -->
+            <div class="toc">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#s1">Project Overview</a></li>
+                    <li><a href="#s2">Objectives</a></li>
+                    <li><a href="#s3">Technology Stack</a></li>
+                    <li><a href="#s4">System Architecture</a></li>
+                    <li><a href="#s5">Folder Structure</a></li>
+                    <li><a href="#s6">Database Design</a></li>
+                    <li><a href="#s7">Module Description</a></li>
+                    <li><a href="#s8">API Reference</a></li>
+                    <li><a href="#s9">User Interface</a></li>
+                    <li><a href="#s10">Security Implementation</a></li>
+                    <li><a href="#s11">Business Logic</a></li>
+                    <li><a href="#s12">Sample Data</a></li>
+                    <li><a href="#s13">Setup &amp; Installation</a></li>
+                    <li><a href="#s14">Testing Summary</a></li>
+                    <li><a href="#s15">Limitations &amp; Future Enhancements</a></li>
+                    <li><a href="#s16">Conclusion</a></li>
+                </ol>
+            </div>
+
+            <!-- 1. PROJECT OVERVIEW -->
+            <h2 class="sec" id="s1">1. Project Overview</h2>
+            <p>The <strong>Student Attendance &amp; Result Management System (SARMS)</strong> is a full-stack university
+                portal designed to digitize and centralize the management of student academic records. It replaces
+                manual paper-based attendance registers and mark sheets with a structured, role-based web application
+                accessible to Students, Teachers, and Administrators.</p>
+            <p>The system provides each role with a dedicated dashboard tailored to their responsibilities. Students can
+                view their attendance records, subject marks, and enrolled subjects. Teachers can mark attendance for
+                any student, enter or update marks, and view the complete student list. Administrators can add new
+                students, teachers, and subjects to the system, with automatic login account creation for each new
+                entity.</p>
+            <p>The backend is built with Python Flask using a Blueprint-based MVC architecture. Data is stored in
+                MongoDB, and the frontend uses Bootstrap 5 for a clean, responsive interface with tabbed dashboards.</p>
+
+            <div class="stat-row">
+                <div class="stat green">
+                    <div class="n">3</div>
+                    <div class="l">User Roles</div>
+                </div>
+                <div class="stat blue">
+                    <div class="n">6</div>
+                    <div class="l">DB Collections</div>
+                </div>
+                <div class="stat orange">
+                    <div class="n">4</div>
+                    <div class="l">Blueprints</div>
+                </div>
+                <div class="stat dark">
+                    <div class="n">12</div>
+                    <div class="l">REST APIs</div>
+                </div>
+                <div class="stat red">
+                    <div class="n">73</div>
+                    <div class="l">Tests Passed</div>
+                </div>
+            </div>
+
+            <!-- 2. OBJECTIVES -->
+            <h2 class="sec" id="s2">2. Objectives</h2>
+            <ul>
+                <li>Build a centralized university portal to manage student attendance and academic results</li>
+                <li>Implement role-based access control for three distinct roles: Student, Teacher, and Admin</li>
+                <li>Allow teachers to mark attendance per student, per subject, per date with Present/Absent status</li>
+                <li>Allow teachers to enter and update marks per student per subject using MongoDB upsert</li>
+                <li>Allow students to view their own attendance records, marks, and enrolled subjects</li>
+                <li>Allow admins to add students, teachers, and subjects through a single dashboard</li>
+                <li>Automatically create login credentials when admin adds a student or teacher</li>
+                <li>Protect all dashboards with session-based role guards to prevent unauthorized access</li>
+                <li>Provide a responsive, tab-based UI using Bootstrap 5 for all three dashboards</li>
+                <li>Seed the database with realistic sample data for demonstration and testing</li>
+            </ul>
+
+            <!-- 3. TECHNOLOGY STACK -->
+            <h2 class="sec" id="s3">3. Technology Stack</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:180px">Layer</th>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Backend Framework</td>
+                        <td>Python Flask</td>
+                        <td>REST API server, routing, session management, Jinja2 template rendering</td>
+                    </tr>
+                    <tr>
+                        <td>Database</td>
+                        <td>MongoDB (PyMongo)</td>
+                        <td>NoSQL document storage for all 6 collections</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend</td>
+                        <td>HTML5, CSS3, JavaScript (ES6 Fetch API)</td>
+                        <td>UI structure, dynamic data loading, form submissions</td>
+                    </tr>
+                    <tr>
+                        <td>CSS Framework</td>
+                        <td>Bootstrap 5.3</td>
+                        <td>Responsive layout, tabs, tables, badges, cards, modals</td>
+                    </tr>
+                    <tr>
+                        <td>Icon Library</td>
+                        <td>Bootstrap Icons 1.10</td>
+                        <td>Dashboard and navigation icons</td>
+                    </tr>
+                    <tr>
+                        <td>Session Management</td>
+                        <td>Flask Sessions (server-side)</td>
+                        <td>Maintain login state and role across requests</td>
+                    </tr>
+                    <tr>
+                        <td>Authentication</td>
+                        <td>Username + Password (plain, stored in users collection)</td>
+                        <td>Role-based login via JSON API with session storage</td>
+                    </tr>
+                    <tr>
+                        <td>Testing</td>
+                        <td>pytest 9.0.3</td>
+                        <td>Black box (30 tests) and white box (43 tests) test suites</td>
+                    </tr>
+                    <tr>
+                        <td>Data Seeding</td>
+                        <td>Python script (seed_data.py)</td>
+                        <td>Populate DB with sample students, teachers, subjects, attendance, marks</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 4. SYSTEM ARCHITECTURE -->
+            <h2 class="sec" id="s4">4. System Architecture</h2>
+            <p>SARMS follows the <strong>MVC (Model-View-Controller)</strong> architectural pattern implemented through
+                Flask Blueprints. Each blueprint handles a specific domain of the application.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Component</th>
+                        <th>Responsibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Model</td>
+                        <td>models/ (student_model, teacher_model, attendance_model, subject_model)</td>
+                        <td>Define document schemas and data structure functions</td>
+                    </tr>
+                    <tr>
+                        <td>View</td>
+                        <td>templates/ (Jinja2 HTML templates)</td>
+                        <td>Render HTML pages with dynamic data injected from Flask context</td>
+                    </tr>
+                    <tr>
+                        <td>Controller</td>
+                        <td>routes/ (auth, student, teacher, admin blueprints)</td>
+                        <td>Handle HTTP requests, apply business logic, query MongoDB, return JSON or render templates
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Config</td>
+                        <td>config.py</td>
+                        <td>MongoDB connection and all 6 collection references</td>
+                    </tr>
+                    <tr>
+                        <td>Entry Point</td>
+                        <td>app.py</td>
+                        <td>Flask app initialization, blueprint registration, dashboard routes with session guards</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">4.1 Request Flow</h3>
+            <pre>
+Browser / Client
+      │
+      ▼
+  Flask App (app.py)
+      │
+      ├── Blueprint Router
+      │       ├── auth_routes    → /login/&lt;role&gt;, POST /login
+      │       ├── student_routes → /students, /student/data
+      │       ├── teacher_routes → /teacher/mark_attendance, /teacher/enter_marks, /teacher/students
+      │       └── admin_routes   → /admin/add_student, /admin/add_teacher, /admin/add_subject
+      │                            /admin/students, /admin/teachers
+      │
+      ├── Dashboard Routes (app.py)
+      │       ├── /student_dashboard  → session.role == "student" guard
+      │       ├── /teacher_dashboard  → session.role == "teacher" guard
+      │       └── /admin_dashboard    → session.role == "admin" guard
+      │
+      ├── Models (schema builders)
+      │       ├── student_model.py  → student_schema()
+      │       ├── teacher_model.py  → teacher_schema()
+      │       ├── attendance_model.py → attendance_collection reference
+      │       └── subject_model.py    → subjects_collection reference
+      │
+      └── MongoDB (sarms_local database)
+              ├── users
+              ├── students
+              ├── teachers
+              ├── subjects
+              ├── attendance
+              └── marks
+</pre>
+
+            <h3 class="sub">4.2 Authentication Flow</h3>
+            <pre>
+User clicks role card on Home page
+      │
+      ▼
+GET /login/&lt;role&gt;  →  Renders login.html with role context
+      │
+      ▼
+User submits username + password (JavaScript fetch POST /login)
+      │
+      ▼
+auth_routes.login()
+  → Query users_collection: {username, password}
+  → If not found: return 401 {"error": "Invalid credentials"}
+  → If found:
+      session["username"] = user["username"]
+      session["role"]     = user["role"]
+      session["user_id"]  = user["ref_id"]   ← student_id or teacher_id
+      return 200 {"redirect": "/&lt;role&gt;_dashboard"}
+      │
+      ▼
+JavaScript: window.location.href = result.redirect
+      │
+      ▼
+Dashboard route in app.py checks session.role
+  → Correct role: render dashboard template
+  → Wrong role:   redirect("/")
+</pre>
+
+            <!-- 5. FOLDER STRUCTURE -->
+            <h2 class="sec" id="s5">5. Folder Structure</h2>
+            <pre>
+SARMS/
+│
+├── app.py                      ← Flask application entry point, dashboard routes, session guards
+├── config.py                   ← MongoDB connection + all 6 collection handles
+├── seed_data.py                ← Populates DB with sample students, teachers, subjects, attendance, marks
+├── seed_admin.py               ← Creates the default admin login account
+├── requirements.txt            ← Python dependencies (flask, pymongo)
+│
+├── models/
+│   ├── student_model.py        ← student_schema() — defines student document structure
+│   ├── teacher_model.py        ← teacher_schema() — defines teacher document structure
+│   ├── attendance_model.py     ← attendance_collection reference
+│   └── subject_model.py        ← subjects_collection reference
+│
+├── routes/
+│   ├── auth_routes.py          ← GET /login/&lt;role&gt;, POST /login (JSON API)
+│   ├── student_routes.py       ← GET /students, GET /student/data
+│   ├── teacher_routes.py       ← POST /teacher/mark_attendance, POST /teacher/enter_marks, GET /teacher/students
+│   └── admin_routes.py         ← POST /admin/add_student, /add_teacher, /add_subject
+│                                  GET /admin/students, /admin/teachers
+│
+├── templates/
+│   ├── home.html               ← Landing page with 3 role cards (Student / Teacher / Admin)
+│   ├── login.html              ← Role-aware login form with JS fetch
+│   ├── student_dashboard.html  ← Tabbed: Attendance | Marks | Subjects
+│   ├── teacher_dashboard.html  ← Tabbed: Mark Attendance | Enter Marks | Student List
+│   └── admin_dashboard.html    ← Tabbed: Add Student | Add Teacher | Assign Subject | View All
+│
+├── static/
+│   └── style.css               ← Custom styles for cards, tabs, navbar
+│
+└── tests/
+    ├── __init__.py
+    ├── test_black_box.py       ← 30 black box tests
+    └── test_white_box.py       ← 43 white box tests
+</pre>
+
+            <!-- 6. DATABASE DESIGN -->
+            <h2 class="sec" id="s6">6. Database Design</h2>
+            <p>SARMS uses MongoDB database named <code>sarms_local</code> with 6 collections. All collections are
+                defined and accessed centrally through <code>config.py</code>.</p>
+
+            <h3 class="sub">6.1 users Collection</h3>
+            <p>Stores login credentials for all three roles. Student and teacher accounts are auto-created when admin
+                adds them. Admin account is created via <code>seed_admin.py</code>.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>_id</code></td>
+                        <td>ObjectId</td>
+                        <td>Auto-generated MongoDB document ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>username</code></td>
+                        <td>String</td>
+                        <td>Login username (equals student_id or teacher_id for auto-created accounts)</td>
+                    </tr>
+                    <tr>
+                        <td><code>password</code></td>
+                        <td>String</td>
+                        <td>Login password (plain text; equals username for auto-created accounts)</td>
+                    </tr>
+                    <tr>
+                        <td><code>role</code></td>
+                        <td>String</td>
+                        <td>"student", "teacher", or "admin"</td>
+                    </tr>
+                    <tr>
+                        <td><code>ref_id</code></td>
+                        <td>String</td>
+                        <td>Links to student_id or teacher_id; stored in session as user_id after login</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">6.2 students Collection</h3>
+            <p>Stores academic profile information for each student.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>_id</code></td>
+                        <td>ObjectId</td>
+                        <td>Auto-generated MongoDB document ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>student_id</code></td>
+                        <td>String</td>
+                        <td>Unique student identifier (e.g., "23BAI001")</td>
+                    </tr>
+                    <tr>
+                        <td><code>name</code></td>
+                        <td>String</td>
+                        <td>Full name of the student</td>
+                    </tr>
+                    <tr>
+                        <td><code>department</code></td>
+                        <td>String</td>
+                        <td>Academic department (e.g., "Computer Science")</td>
+                    </tr>
+                    <tr>
+                        <td><code>semester</code></td>
+                        <td>Integer</td>
+                        <td>Current semester number (1–8)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">6.3 teachers Collection</h3>
+            <p>Stores profile information for each teacher.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>_id</code></td>
+                        <td>ObjectId</td>
+                        <td>Auto-generated MongoDB document ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>teacher_id</code></td>
+                        <td>String</td>
+                        <td>Unique teacher identifier (e.g., "TCH001")</td>
+                    </tr>
+                    <tr>
+                        <td><code>name</code></td>
+                        <td>String</td>
+                        <td>Full name with title (e.g., "Dr. Ramesh Kumar")</td>
+                    </tr>
+                    <tr>
+                        <td><code>department</code></td>
+                        <td>String</td>
+                        <td>Department the teacher belongs to</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">6.4 subjects Collection</h3>
+            <p>Stores subject definitions with semester and teacher assignment.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>_id</code></td>
+                        <td>ObjectId</td>
+                        <td>Auto-generated MongoDB document ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>subject_code</code></td>
+                        <td>String</td>
+                        <td>Unique subject code (e.g., "CS301")</td>
+                    </tr>
+                    <tr>
+                        <td><code>subject_name</code></td>
+                        <td>String</td>
+                        <td>Full subject name (e.g., "Data Structures")</td>
+                    </tr>
+                    <tr>
+                        <td><code>semester</code></td>
+                        <td>Integer</td>
+                        <td>Semester in which the subject is taught</td>
+                    </tr>
+                    <tr>
+                        <td><code>teacher_id</code></td>
+                        <td>String</td>
+                        <td>Reference to the assigned teacher's teacher_id</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">6.5 attendance Collection</h3>
+            <p>Stores individual attendance records per student, per subject, per date. Multiple records can exist for
+                the same student and subject across different dates.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>_id</code></td>
+                        <td>ObjectId</td>
+                        <td>Auto-generated MongoDB document ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>student_id</code></td>
+                        <td>String</td>
+                        <td>Reference to the student's student_id</td>
+                    </tr>
+                    <tr>
+                        <td><code>subject_code</code></td>
+                        <td>String</td>
+                        <td>Reference to the subject's subject_code</td>
+                    </tr>
+                    <tr>
+                        <td><code>status</code></td>
+                        <td>String</td>
+                        <td>"Present" or "Absent"</td>
+                    </tr>
+                    <tr>
+                        <td><code>date</code></td>
+                        <td>String</td>
+                        <td>Date of the class in YYYY-MM-DD format</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">6.6 marks Collection</h3>
+            <p>Stores marks per student per subject. Uses upsert so re-entering marks for the same student+subject
+                updates the existing record rather than creating a duplicate.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>_id</code></td>
+                        <td>ObjectId</td>
+                        <td>Auto-generated MongoDB document ID</td>
+                    </tr>
+                    <tr>
+                        <td><code>student_id</code></td>
+                        <td>String</td>
+                        <td>Reference to the student's student_id</td>
+                    </tr>
+                    <tr>
+                        <td><code>subject_code</code></td>
+                        <td>String</td>
+                        <td>Reference to the subject's subject_code</td>
+                    </tr>
+                    <tr>
+                        <td><code>marks</code></td>
+                        <td>Number</td>
+                        <td>Marks obtained (0–100)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 7. MODULE DESCRIPTION -->
+            <h2 class="sec" id="s7">7. Module Description</h2>
+
+            <h3 class="sub">7.1 Authentication Module — routes/auth_routes.py</h3>
+            <p>Handles role-aware login using a JSON API consumed by JavaScript fetch on the frontend. The login page is
+                rendered with the role context so it can display the appropriate heading. On successful login, the
+                user's username, role, and ref_id (student_id or teacher_id) are stored in the Flask session.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Route</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>login_page(role)</code></td>
+                        <td>/login/&lt;role&gt;</td>
+                        <td>GET</td>
+                        <td>Renders login.html with the role variable injected into the template for conditional heading
+                            display</td>
+                    </tr>
+                    <tr>
+                        <td><code>login()</code></td>
+                        <td>/login</td>
+                        <td>POST (JSON)</td>
+                        <td>Queries users_collection with username + password; sets session on success; returns redirect
+                            URL as JSON; returns 401 on failure</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">7.2 Student Module — routes/student_routes.py</h3>
+            <p>Provides data APIs for the student dashboard. The <code>/student/data</code> endpoint uses the
+                <code>user_id</code> from the session (which equals the student_id) to fetch only that student's
+                records.
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Route</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>get_students()</code></td>
+                        <td>/students</td>
+                        <td>GET</td>
+                        <td>Returns all students as a JSON list (used by admin and teacher views)</td>
+                    </tr>
+                    <tr>
+                        <td><code>get_my_data()</code></td>
+                        <td>/student/data</td>
+                        <td>GET</td>
+                        <td>Returns the logged-in student's attendance, marks, and all subjects as a single JSON object;
+                            returns 401 if not logged in</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">7.3 Teacher Module — routes/teacher_routes.py</h3>
+            <p>Provides APIs for teacher operations. Both write operations validate that the target student exists
+                before inserting or updating records. Marks use MongoDB upsert to prevent duplicate entries.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Route</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>mark_attendance()</code></td>
+                        <td>/teacher/mark_attendance</td>
+                        <td>POST (JSON)</td>
+                        <td>Validates student_id exists; inserts attendance document with student_id, subject_code,
+                            status, date; returns 400 if student not found</td>
+                    </tr>
+                    <tr>
+                        <td><code>enter_marks()</code></td>
+                        <td>/teacher/enter_marks</td>
+                        <td>POST (JSON)</td>
+                        <td>Validates student_id exists; upserts marks document using {student_id, subject_code} as
+                            filter and $set {marks} as update; returns 400 if student not found</td>
+                    </tr>
+                    <tr>
+                        <td><code>get_students()</code></td>
+                        <td>/teacher/students</td>
+                        <td>GET</td>
+                        <td>Returns all students as a JSON list for the teacher's student list tab</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">7.4 Admin Module — routes/admin_routes.py</h3>
+            <p>Provides APIs for all admin management operations. Adding a student or teacher automatically creates a
+                corresponding login account in the users collection using upsert, with the entity ID as both username
+                and default password.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Route</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>add_student()</code></td>
+                        <td>/admin/add_student</td>
+                        <td>POST (JSON)</td>
+                        <td>Inserts student document; upserts user login with role="student", username=student_id,
+                            password=student_id, ref_id=student_id</td>
+                    </tr>
+                    <tr>
+                        <td><code>add_teacher()</code></td>
+                        <td>/admin/add_teacher</td>
+                        <td>POST (JSON)</td>
+                        <td>Inserts teacher document; upserts user login with role="teacher", username=teacher_id,
+                            password=teacher_id, ref_id=teacher_id</td>
+                    </tr>
+                    <tr>
+                        <td><code>add_subject()</code></td>
+                        <td>/admin/add_subject</td>
+                        <td>POST (JSON)</td>
+                        <td>Inserts subject document with subject_code, subject_name, semester, teacher_id</td>
+                    </tr>
+                    <tr>
+                        <td><code>get_students()</code></td>
+                        <td>/admin/students</td>
+                        <td>GET</td>
+                        <td>Returns all students from students_collection as JSON list</td>
+                    </tr>
+                    <tr>
+                        <td><code>get_teachers()</code></td>
+                        <td>/admin/teachers</td>
+                        <td>GET</td>
+                        <td>Returns all teachers from teachers_collection as JSON list</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">7.5 Dashboard Routes — app.py</h3>
+            <p>Core dashboard routes are defined directly in <code>app.py</code> with inline session role guards. Each
+                dashboard route checks the session role and redirects to home if the role does not match.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Route</th>
+                        <th>Guard</th>
+                        <th>Template</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>/student_dashboard</td>
+                        <td>session.role == "student"</td>
+                        <td>student_dashboard.html</td>
+                    </tr>
+                    <tr>
+                        <td>/teacher_dashboard</td>
+                        <td>session.role == "teacher"</td>
+                        <td>teacher_dashboard.html</td>
+                    </tr>
+                    <tr>
+                        <td>/admin_dashboard</td>
+                        <td>session.role == "admin"</td>
+                        <td>admin_dashboard.html</td>
+                    </tr>
+                    <tr>
+                        <td>/logout</td>
+                        <td>None</td>
+                        <td>Clears session, redirects to /</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 8. API REFERENCE -->
+            <h2 class="sec" id="s8">8. API Reference</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Endpoint</th>
+                        <th>Auth</th>
+                        <th>Request Body / Params</th>
+                        <th>Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge green">GET</span></td>
+                        <td>/login/&lt;role&gt;</td>
+                        <td>No</td>
+                        <td>role in URL path</td>
+                        <td>Renders login.html</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge orange">POST</span></td>
+                        <td>/login</td>
+                        <td>No</td>
+                        <td>{username, password}</td>
+                        <td>{redirect} or 401 {error}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">GET</span></td>
+                        <td>/students</td>
+                        <td>No</td>
+                        <td>None</td>
+                        <td>JSON array of all students</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">GET</span></td>
+                        <td>/student/data</td>
+                        <td>Session</td>
+                        <td>None (uses session user_id)</td>
+                        <td>{attendance[], marks[], subjects[]}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge orange">POST</span></td>
+                        <td>/teacher/mark_attendance</td>
+                        <td>No</td>
+                        <td>{student_id, subject_code, status, date}</td>
+                        <td>{message} or 400 {error}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge orange">POST</span></td>
+                        <td>/teacher/enter_marks</td>
+                        <td>No</td>
+                        <td>{student_id, subject_code, marks}</td>
+                        <td>{message} or 400 {error}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">GET</span></td>
+                        <td>/teacher/students</td>
+                        <td>No</td>
+                        <td>None</td>
+                        <td>JSON array of all students</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge orange">POST</span></td>
+                        <td>/admin/add_student</td>
+                        <td>No</td>
+                        <td>{student_id, name, department, semester}</td>
+                        <td>{message}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge orange">POST</span></td>
+                        <td>/admin/add_teacher</td>
+                        <td>No</td>
+                        <td>{teacher_id, name, department}</td>
+                        <td>{message}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge orange">POST</span></td>
+                        <td>/admin/add_subject</td>
+                        <td>No</td>
+                        <td>{subject_code, subject_name, semester, teacher_id}</td>
+                        <td>{message}</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">GET</span></td>
+                        <td>/admin/students</td>
+                        <td>No</td>
+                        <td>None</td>
+                        <td>JSON array of all students</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">GET</span></td>
+                        <td>/admin/teachers</td>
+                        <td>No</td>
+                        <td>None</td>
+                        <td>JSON array of all teachers</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 9. USER INTERFACE -->
+            <h2 class="sec" id="s9">9. User Interface</h2>
+
+            <h3 class="sub">9.1 Home Page — home.html</h3>
+            <p>The landing page presents three role selection cards side by side using Bootstrap's grid system. Each
+                card displays a role emoji, title, description, and a colored login button. Student uses blue, Teacher
+                uses green, and Admin uses red. The page uses a light grey background with white cards and subtle box
+                shadows. Clicking a card navigates to <code>/login/&lt;role&gt;</code>.</p>
+
+            <h3 class="sub">9.2 Login Page — login.html</h3>
+            <p>A centered Bootstrap card form with username and password fields. The page heading dynamically shows the
+                role (Student Login / Teacher Login / Admin Login) using Jinja2 conditional rendering. Login is handled
+                via JavaScript <code>fetch()</code> POST to <code>/login</code> with JSON body. On success, the browser
+                is redirected to the appropriate dashboard. On failure, a Bootstrap danger alert is shown inline without
+                a page reload.</p>
+
+            <h3 class="sub">9.3 Student Dashboard — student_dashboard.html</h3>
+            <p>A tabbed Bootstrap interface with three tabs:</p>
+            <ul>
+                <li><strong>Attendance tab</strong> — Fetches <code>/student/data</code> and renders a table with
+                    Subject Code, Date, and Status columns. Status is displayed as a green "Present" or red "Absent"
+                    Bootstrap badge.</li>
+                <li><strong>Marks tab</strong> — Renders a table with Subject Code and Marks columns from the same API
+                    response.</li>
+                <li><strong>Subjects tab</strong> — Renders a table with Subject Code, Subject Name, Semester, and
+                    Teacher ID columns.</li>
+            </ul>
+            <p>All data is loaded on page load via a single <code>fetch()</code> call. Empty states show a "No records"
+                message in the table body.</p>
+
+            <h3 class="sub">9.4 Teacher Dashboard — teacher_dashboard.html</h3>
+            <p>A tabbed Bootstrap interface with three tabs:</p>
+            <ul>
+                <li><strong>Mark Attendance tab</strong> — Form with Student ID, Subject Code, Status (Present/Absent
+                    dropdown), and Date fields. On submit, calls <code>POST /teacher/mark_attendance</code>.
+                    Success/error messages auto-dismiss after 3 seconds.</li>
+                <li><strong>Enter Marks tab</strong> — Form with Student ID, Subject Code, and Marks (0–100) fields. On
+                    submit, calls <code>POST /teacher/enter_marks</code>. Uses upsert so re-submitting updates existing
+                    marks.</li>
+                <li><strong>Student List tab</strong> — Loads on tab click (lazy loading) via
+                    <code>GET /teacher/students</code>. Renders a table with Student ID, Name, Department, and Semester.
+                </li>
+            </ul>
+
+            <h3 class="sub">9.5 Admin Dashboard — admin_dashboard.html</h3>
+            <p>A tabbed Bootstrap interface with four tabs:</p>
+            <ul>
+                <li><strong>Add Student tab</strong> — Form with Student ID, Name, Department, and Semester fields.
+                    Calls <code>POST /admin/add_student</code>. Auto-creates login on success.</li>
+                <li><strong>Add Teacher tab</strong> — Form with Teacher ID, Name, and Department fields. Calls
+                    <code>POST /admin/add_teacher</code>. Auto-creates login on success.
+                </li>
+                <li><strong>Assign Subject tab</strong> — Form with Subject Code, Subject Name, Semester, and Teacher ID
+                    fields. Calls <code>POST /admin/add_subject</code>.</li>
+                <li><strong>View All tab</strong> — Two side-by-side tables showing all students and all teachers.
+                    Loaded on tab click via parallel <code>Promise.all()</code> fetch calls to
+                    <code>/admin/students</code> and <code>/admin/teachers</code>.
+                </li>
+            </ul>
+            <p>All forms show inline success/error alerts that auto-clear after 3 seconds. Forms reset on success.</p>
+
+            <!-- 10. SECURITY -->
+            <h2 class="sec" id="s10">10. Security Implementation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:220px">Security Measure</th>
+                        <th>Implementation Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Session-Based Authentication</td>
+                        <td>Flask server-side sessions store <code>username</code>, <code>role</code>, and
+                            <code>user_id</code> after login. A secret key (<code>sarms_secret_key_2024</code>) signs
+                            the session cookie to prevent client-side tampering.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Role-Based Dashboard Guards</td>
+                        <td>Each dashboard route in <code>app.py</code> checks
+                            <code>session.get("role") != "&lt;required_role&gt;"</code> and redirects to <code>/</code>
+                            if the check fails. This prevents cross-role access (e.g., a student cannot access the
+                            teacher dashboard).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Student Data Isolation</td>
+                        <td>The <code>/student/data</code> endpoint uses <code>session.get("user_id")</code> as the
+                            filter for attendance and marks queries. Students can only see their own records — they
+                            cannot query other students' data.</td>
+                    </tr>
+                    <tr>
+                        <td>Student Existence Validation</td>
+                        <td>Both <code>mark_attendance()</code> and <code>enter_marks()</code> in teacher_routes query
+                            the students_collection to verify the student_id exists before writing any record. Invalid
+                            student IDs return HTTP 400.</td>
+                    </tr>
+                    <tr>
+                        <td>Session Logout</td>
+                        <td><code>/logout</code> calls <code>session.clear()</code> which removes all session keys,
+                            effectively invalidating the login state.</td>
+                    </tr>
+                    <tr>
+                        <td>Auto-Login Security Note</td>
+                        <td>Auto-created student/teacher accounts use the entity ID as both username and password. This
+                            is intentional for a university demo system where the admin distributes credentials.
+                            Production systems should enforce password change on first login.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 11. BUSINESS LOGIC -->
+            <h2 class="sec" id="s11">11. Business Logic</h2>
+
+            <h3 class="sub">11.1 Auto Login Account Creation</h3>
+            <p>When an admin adds a student or teacher, the system automatically creates a login account in the users
+                collection using MongoDB's <code>upsert=True</code>. This means re-adding the same entity updates the
+                existing account rather than creating a duplicate.</p>
+            <pre>
+# When admin adds student "23BAI001":
+users_collection.update_one(
+    {"username": "23BAI001"},
+    {"$set": {
+        "username": "23BAI001",
+        "password": "23BAI001",   # default password = student_id
+        "role":     "student",
+        "ref_id":   "23BAI001"    # stored in session as user_id after login
+    }},
+    upsert=True
+)
+</pre>
+
+            <h3 class="sub">11.2 Marks Upsert Logic</h3>
+            <p>Marks are stored using MongoDB's upsert operation. If a mark record already exists for a student+subject
+                combination, it is updated. If not, a new record is created. This prevents duplicate mark entries and
+                allows teachers to correct marks.</p>
+            <pre>
+marks_collection.update_one(
+    {"student_id": data["student_id"], "subject_code": data["subject_code"]},
+    {"$set": {"marks": data["marks"]}},
+    upsert=True
+)
+# First call:  creates new document
+# Second call: updates existing document's marks field
+</pre>
+
+            <h3 class="sub">11.3 Session-Based Data Scoping</h3>
+            <p>The student data API uses the session's <code>user_id</code> (which equals the student_id) to scope all
+                queries. This ensures each student only sees their own data without any additional filtering logic in
+                the frontend.</p>
+            <pre>
+@student_routes.route("/student/data", methods=["GET"])
+def get_my_data():
+    student_id = session.get("user_id")   # set during login from ref_id
+    if not student_id:
+        return jsonify({"error": "Not logged in"}), 401
+
+    attendance = list(attendance_collection.find({"student_id": student_id}, {"_id": 0}))
+    marks      = list(marks_collection.find({"student_id": student_id}, {"_id": 0}))
+    subjects   = list(subjects_collection.find({}, {"_id": 0}))  # all subjects
+
+    return jsonify({"attendance": attendance, "marks": marks, "subjects": subjects})
+</pre>
+
+            <h3 class="sub">11.4 Role-to-Redirect Mapping</h3>
+            <p>After successful login, the system maps the user's role to the appropriate dashboard URL using a Python
+                dictionary. Unknown roles default to the home page.</p>
+            <pre>
+redirects = {
+    "student": "/student_dashboard",
+    "teacher": "/teacher_dashboard",
+    "admin":   "/admin_dashboard"
+}
+return jsonify({"redirect": redirects.get(user["role"], "/")})
+</pre>
+
+            <!-- 12. SAMPLE DATA -->
+            <h2 class="sec" id="s12">12. Sample Data</h2>
+            <p>The <code>seed_data.py</code> script clears existing student/teacher/subject/attendance/marks data and
+                inserts the following sample records:</p>
+
+            <h3 class="sub">12.1 Teachers</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Teacher ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Login Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TCH001</td>
+                        <td>Dr. Ramesh Kumar</td>
+                        <td>Computer Science</td>
+                        <td>TCH001</td>
+                    </tr>
+                    <tr>
+                        <td>TCH002</td>
+                        <td>Prof. Sneha Patel</td>
+                        <td>Mathematics</td>
+                        <td>TCH002</td>
+                    </tr>
+                    <tr>
+                        <td>TCH003</td>
+                        <td>Dr. Arjun Mehta</td>
+                        <td>Physics</td>
+                        <td>TCH003</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">12.2 Students</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Semester</th>
+                        <th>Login Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>23BAI001</td>
+                        <td>Arun Sharma</td>
+                        <td>Computer Science</td>
+                        <td>4</td>
+                        <td>23BAI001</td>
+                    </tr>
+                    <tr>
+                        <td>23BAI002</td>
+                        <td>Priya Nair</td>
+                        <td>Computer Science</td>
+                        <td>4</td>
+                        <td>23BAI002</td>
+                    </tr>
+                    <tr>
+                        <td>23BAI003</td>
+                        <td>Rahul Verma</td>
+                        <td>Mathematics</td>
+                        <td>2</td>
+                        <td>23BAI003</td>
+                    </tr>
+                    <tr>
+                        <td>23BAI004</td>
+                        <td>Anjali Singh</td>
+                        <td>Physics</td>
+                        <td>3</td>
+                        <td>23BAI004</td>
+                    </tr>
+                    <tr>
+                        <td>23BAI005</td>
+                        <td>Karan Patel</td>
+                        <td>Computer Science</td>
+                        <td>4</td>
+                        <td>23BAI005</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">12.3 Subjects</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>Semester</th>
+                        <th>Teacher</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>CS301</td>
+                        <td>Data Structures</td>
+                        <td>4</td>
+                        <td>TCH001 — Dr. Ramesh Kumar</td>
+                    </tr>
+                    <tr>
+                        <td>CS302</td>
+                        <td>Operating Systems</td>
+                        <td>4</td>
+                        <td>TCH001 — Dr. Ramesh Kumar</td>
+                    </tr>
+                    <tr>
+                        <td>MA201</td>
+                        <td>Linear Algebra</td>
+                        <td>2</td>
+                        <td>TCH002 — Prof. Sneha Patel</td>
+                    </tr>
+                    <tr>
+                        <td>PH301</td>
+                        <td>Quantum Mechanics</td>
+                        <td>3</td>
+                        <td>TCH003 — Dr. Arjun Mehta</td>
+                    </tr>
+                    <tr>
+                        <td>CS303</td>
+                        <td>Database Management</td>
+                        <td>4</td>
+                        <td>TCH001 — Dr. Ramesh Kumar</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">12.4 Sample Marks</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>CS301</th>
+                        <th>CS302</th>
+                        <th>CS303</th>
+                        <th>MA201</th>
+                        <th>PH301</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arun Sharma (23BAI001)</td>
+                        <td>88</td>
+                        <td>74</td>
+                        <td>91</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Priya Nair (23BAI002)</td>
+                        <td>79</td>
+                        <td>85</td>
+                        <td>68</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Rahul Verma (23BAI003)</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>92</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>Anjali Singh (23BAI004)</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>77</td>
+                    </tr>
+                    <tr>
+                        <td>Karan Patel (23BAI005)</td>
+                        <td>83</td>
+                        <td>90</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">12.5 Admin Account</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Created By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge red">Admin</span></td>
+                        <td>admin</td>
+                        <td>admin123</td>
+                        <td>seed_admin.py</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 13. SETUP & INSTALLATION -->
+            <h2 class="sec" id="s13">13. Setup &amp; Installation</h2>
+
+            <h3 class="sub">Step 1 — Prerequisites</h3>
+            <ul>
+                <li>Python 3.10 or higher</li>
+                <li>MongoDB Community Server (running on localhost:27017)</li>
+                <li>pip (Python package manager)</li>
+            </ul>
+
+            <h3 class="sub">Step 2 — Install Dependencies</h3>
+            <pre>pip install flask pymongo</pre>
+
+            <h3 class="sub">Step 3 — Start MongoDB</h3>
+            <pre>
+# Windows Service
+net start MongoDB
+
+# Or run directly
+mongod
+</pre>
+
+            <h3 class="sub">Step 4 — Create Admin Account</h3>
+            <pre>python seed_admin.py
+# Output: Admin user created: username=admin, password=admin123</pre>
+
+            <h3 class="sub">Step 5 — Seed Sample Data</h3>
+            <pre>python seed_data.py
+# Inserts 5 students, 3 teachers, 5 subjects, 12 attendance records, 10 marks records</pre>
+
+            <h3 class="sub">Step 6 — Run the Application</h3>
+            <pre>python app.py
+# Running on http://127.0.0.1:5000</pre>
+
+            <h3 class="sub">Step 7 — Access in Browser</h3>
+            <pre>http://127.0.0.1:5000</pre>
+
+            <h3 class="sub">Step 8 — Login Credentials</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Role</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge red">Admin</span></td>
+                        <td>admin</td>
+                        <td>admin123</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">Student</span></td>
+                        <td>23BAI001</td>
+                        <td>23BAI001</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge green">Student</span></td>
+                        <td>23BAI002</td>
+                        <td>23BAI002</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge blue">Teacher</span></td>
+                        <td>TCH001</td>
+                        <td>TCH001</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge blue">Teacher</span></td>
+                        <td>TCH002</td>
+                        <td>TCH002</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 14. TESTING SUMMARY -->
+            <h2 class="sec" id="s14">14. Testing Summary</h2>
+            <p>SARMS was tested using two methodologies — Black Box and White Box — with a total of 73 automated test
+                cases using pytest 9.0.3.</p>
+
+            <div class="stat-row">
+                <div class="stat dark">
+                    <div class="n">73</div>
+                    <div class="l">Total Tests</div>
+                </div>
+                <div class="stat green">
+                    <div class="n">73</div>
+                    <div class="l">Passed</div>
+                </div>
+                <div class="stat red">
+                    <div class="n">0</div>
+                    <div class="l">Failed</div>
+                </div>
+                <div class="stat blue">
+                    <div class="n">30</div>
+                    <div class="l">Black Box</div>
+                </div>
+                <div class="stat orange">
+                    <div class="n">43</div>
+                    <div class="l">White Box</div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test Type</th>
+                        <th>Modules Covered</th>
+                        <th>Tests</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Black Box</td>
+                        <td>Home Page, Login Pages, Login API (all 3 roles), Dashboard Access Control, Student Data API,
+                            Teacher Routes (attendance + marks), Admin Routes (add student/teacher/subject +
+                            auto-login), Attendance Persistence</td>
+                        <td>30</td>
+                        <td style="color:#27ae60;font-weight:700">30 PASSED</td>
+                    </tr>
+                    <tr>
+                        <td>White Box</td>
+                        <td>student_schema(), teacher_schema(), Login Redirect Logic, Session Guard Logic, Attendance
+                            Record Structure, Marks Upsert Logic, Admin Student Document, Auto Login Creation Logic,
+                            Subject Document Structure, Student Data Session Check</td>
+                        <td>43</td>
+                        <td style="color:#27ae60;font-weight:700">43 PASSED</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>TOTAL</td>
+                        <td></td>
+                        <td>73</td>
+                        <td>73 PASSED</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <p>Full test details with all test case tables are available in <code>TEST_REPORT_SARMS.html</code>.</p>
+
+            <!-- 15. LIMITATIONS & FUTURE ENHANCEMENTS -->
+            <h2 class="sec" id="s15">15. Limitations &amp; Future Enhancements</h2>
+
+            <h3 class="sub">15.1 Current Limitations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Limitation</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Passwords stored as plain text in MongoDB</td>
+                        <td>Security risk — passwords should be hashed with bcrypt or SHA-256</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>No admin authentication guard on admin API routes</td>
+                        <td>Admin APIs (/admin/add_student etc.) are accessible without login session check</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Default password equals student/teacher ID</td>
+                        <td>Weak default credentials; no forced password change on first login</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>No attendance percentage calculation</td>
+                        <td>Students see raw records but no summary (e.g., 75% attendance in CS301)</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>No subject enrollment — all subjects shown to all students</td>
+                        <td>Students see subjects from all semesters, not just their enrolled ones</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>No duplicate attendance check</td>
+                        <td>Teacher can mark attendance for the same student+subject+date multiple times</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>No pagination on student/teacher lists</td>
+                        <td>Large datasets may cause slow page loads in admin and teacher views</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>No input validation on admin forms beyond HTML5 required</td>
+                        <td>Invalid data (e.g., duplicate student_id) can be inserted without error feedback</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="sub">15.2 Future Enhancements</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Enhancement</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Password Hashing</td>
+                        <td>Implement bcrypt or SHA-256 hashing for all stored passwords</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Admin Route Guards</td>
+                        <td>Add session role check to all admin API endpoints to prevent unauthorized access</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Attendance Summary</td>
+                        <td>Calculate and display attendance percentage per subject for each student</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Subject Enrollment</td>
+                        <td>Link students to specific subjects based on semester and department</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Duplicate Attendance Prevention</td>
+                        <td>Check for existing attendance record before inserting (same student+subject+date)</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Grade Calculation</td>
+                        <td>Auto-calculate letter grades (A/B/C/D/F) from marks and display in student dashboard</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Result Report Card</td>
+                        <td>Generate a printable/downloadable PDF report card for each student</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>Email Notifications</td>
+                        <td>Send email to students when marks are entered or attendance is marked</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td>Admin Analytics</td>
+                        <td>Dashboard charts showing department-wise attendance rates and average marks</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>Mobile Responsive Improvements</td>
+                        <td>Optimize tab layouts and tables for small screen devices</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 16. CONCLUSION -->
+            <h2 class="sec" id="s16">16. Conclusion</h2>
+            <p>The Student Attendance &amp; Result Management System (SARMS) successfully delivers a complete,
+                functional university portal that digitizes the core academic record-keeping processes. The system
+                supports three distinct user roles — Student, Teacher, and Admin — each with a dedicated, role-protected
+                dashboard built with Bootstrap 5 tabs for a clean and intuitive user experience.</p>
+            <p>The Flask Blueprint architecture ensures clean separation of concerns across authentication, student
+                data, teacher operations, and admin management. MongoDB's flexible document model accommodates the
+                varied data structures across students, teachers, subjects, attendance records, and marks without
+                complex relational joins. The auto-login creation feature significantly reduces admin overhead by
+                automatically provisioning credentials when new students or teachers are added.</p>
+            <p>Key technical achievements include session-based role-based access control protecting all three
+                dashboards, MongoDB upsert for idempotent marks entry, session-scoped student data isolation ensuring
+                privacy, and a comprehensive seed script providing realistic demonstration data across all collections.
+            </p>
+            <p>The project was validated through 73 automated test cases (30 black box + 43 white box) with a 100% pass
+                rate, confirming the correctness of all schemas, guard logic, API responses, and data persistence
+                operations.</p>
+            <p>With the identified enhancements — particularly password hashing, admin route guards, attendance
+                percentage calculation, and subject enrollment — SARMS can evolve from a demonstration system into a
+                production-grade university management platform.</p>
+
+            <hr>
+            <p style="text-align:center;color:#aaa;font-size:12px;margin-top:24px">
+                SARMS Project Report &nbsp;|&nbsp; Student Attendance &amp; Result Management System &nbsp;|&nbsp; Flask
+                + MongoDB + Bootstrap 5 &nbsp;|&nbsp; April 2026
+            </p>
+
+        </div><!-- .body -->
+    </div><!-- .page -->
+</body>
+
+</html>

@@ -1,0 +1,1757 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Selenium Automation Testing Report</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            color: #222;
+            font-size: 14px
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 30px auto 60px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .10);
+            overflow: hidden
+        }
+
+        /* Cover */
+        .cover {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #fff;
+            text-align: center;
+            padding: 64px 40px 56px
+        }
+
+        .cover .logo {
+            font-size: 54px;
+            margin-bottom: 14px
+        }
+
+        .cover h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 6px
+        }
+
+        .cover h2 {
+            font-size: 17px;
+            font-weight: 300;
+            opacity: .8;
+            margin-bottom: 28px
+        }
+
+        .cover .meta {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 22px
+        }
+
+        .cover .mi {
+            background: rgba(255, 255, 255, .12);
+            border-radius: 8px;
+            padding: 12px 22px
+        }
+
+        .cover .mi .lbl {
+            font-size: 11px;
+            opacity: .65;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .cover .mi .val {
+            font-size: 14px;
+            font-weight: 700;
+            margin-top: 4px
+        }
+
+        /* Body */
+        .body {
+            padding: 48px 52px 64px
+        }
+
+        /* TOC */
+        .toc {
+            background: #f0f4ff;
+            border-left: 5px solid #0f3460;
+            border-radius: 0 8px 8px 0;
+            padding: 22px 28px;
+            margin-bottom: 44px
+        }
+
+        .toc h3 {
+            color: #0f3460;
+            font-size: 13px;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px
+        }
+
+        .toc ol {
+            margin-left: 20px;
+            line-height: 2.3
+        }
+
+        .toc a {
+            color: #0f3460;
+            text-decoration: none;
+            font-size: 13px
+        }
+
+        .toc a:hover {
+            text-decoration: underline
+        }
+
+        /* Headings */
+        h2.sec {
+            font-size: 20px;
+            color: #0f3460;
+            border-left: 5px solid #0f3460;
+            padding-left: 14px;
+            margin: 44px 0 16px
+        }
+
+        h3.sub {
+            font-size: 15px;
+            color: #2c3e50;
+            margin: 26px 0 10px;
+            border-bottom: 2px solid #e8eaf6;
+            padding-bottom: 5px
+        }
+
+        h4.mod {
+            font-size: 13px;
+            color: #555;
+            margin: 18px 0 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        p {
+            line-height: 1.8;
+            margin-bottom: 12px;
+            color: #444
+        }
+
+        ul,
+        ol {
+            margin: 8px 0 14px 24px;
+            line-height: 2.1;
+            color: #444
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 13px
+        }
+
+        th {
+            background: #0f3460;
+            color: #fff;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600
+        }
+
+        td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top
+        }
+
+        tr:nth-child(even) td {
+            background: #f8f9ff
+        }
+
+        tr:hover td {
+            background: #e8eaf6
+        }
+
+        tfoot td {
+            background: #2c3e50 !important;
+            color: #fff;
+            font-weight: 700
+        }
+
+        /* Code */
+        pre {
+            background: #1e2a38;
+            color: #a8d8ea;
+            padding: 18px 22px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            overflow-x: auto;
+            margin: 12px 0 20px;
+            line-height: 1.7
+        }
+
+        code {
+            background: #e8eaf6;
+            color: #0f3460;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 12.5px;
+            font-family: monospace
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px
+        }
+
+        .info-grid table th {
+            background: #2c3e50
+        }
+
+        /* Stat cards */
+        .stat-row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 20px 0
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 130px;
+            border-radius: 10px;
+            padding: 18px 16px;
+            text-align: center
+        }
+
+        .stat .n {
+            font-size: 30px;
+            font-weight: 800
+        }
+
+        .stat .l {
+            font-size: 11px;
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px
+        }
+
+        .stat.navy {
+            background: #e8eaf6;
+            color: #0f3460
+        }
+
+        .stat.green {
+            background: #eafaf1;
+            color: #27ae60
+        }
+
+        .stat.orange {
+            background: #fef9e7;
+            color: #e67e22
+        }
+
+        .stat.dark {
+            background: #eaecee;
+            color: #2c3e50
+        }
+
+        .stat.red {
+            background: #fdecea;
+            color: #c0392b
+        }
+
+        .stat.blue {
+            background: #eaf4fb;
+            color: #1a5276
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 3px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            margin: 2px
+        }
+
+        .badge.pass {
+            background: #27ae60;
+            color: #fff
+        }
+
+        .badge.fail {
+            background: #c0392b;
+            color: #fff
+        }
+
+        .badge.navy {
+            background: #0f3460;
+            color: #fff
+        }
+
+        .badge.orange {
+            background: #e67e22;
+            color: #fff
+        }
+
+        .badge.gray {
+            background: #7f8c8d;
+            color: #fff
+        }
+
+        .badge.green {
+            background: #1e8449;
+            color: #fff
+        }
+
+        /* Result cell */
+        .pass {
+            color: #27ae60;
+            font-weight: 700
+        }
+
+        .fail {
+            color: #c0392b;
+            font-weight: 700
+        }
+
+        .tid {
+            font-family: monospace;
+            font-weight: 700;
+            color: #0f3460;
+            white-space: nowrap
+        }
+
+        .num {
+            text-align: center
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 36px 0
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- COVER -->
+        <div class="cover">
+            <div class="logo">🤖</div>
+            <h1>Selenium Automation Testing Report</h1>
+            <h2>Login Module &amp; Core Module — SARMS &amp; SRTBS</h2>
+            <div class="meta">
+                <div class="mi">
+                    <div class="lbl">Tool</div>
+                    <div class="val">Selenium WebDriver</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Language</div>
+                    <div class="val">Python 3.14</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Framework</div>
+                    <div class="val">pytest + WebDriver Manager</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Browser</div>
+                    <div class="val">Google Chrome</div>
+                </div>
+                <div class="mi">
+                    <div class="lbl">Report Date</div>
+                    <div class="val">April 2026</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="body">
+
+            <!-- TOC -->
+            <div class="toc">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><a href="#s1">Objective</a></li>
+                    <li><a href="#s2">Problem Statement</a></li>
+                    <li><a href="#s3">Tools &amp; Technologies</a></li>
+                    <li><a href="#s4">Test Environment Setup</a></li>
+                    <li><a href="#s5">Automation Architecture</a></li>
+                    <li><a href="#s6">SARMS — Selenium Test Cases</a></li>
+                    <li><a href="#s7">SRTBS — Selenium Test Cases</a></li>
+                    <li><a href="#s8">Test Execution Results</a></li>
+                    <li><a href="#s9">Sample Automation Code</a></li>
+                    <li><a href="#s10">Advantages of Automation Testing</a></li>
+                    <li><a href="#s11">Limitations</a></li>
+                    <li><a href="#s12">Conclusion</a></li>
+                </ol>
+            </div>
+
+            <!-- 1. OBJECTIVE -->
+            <h2 class="sec" id="s1">1. Objective</h2>
+            <ul>
+                <li>To implement automation testing using Selenium WebDriver for web-based applications</li>
+                <li>To convert manual test cases into automated, repeatable scripts using Python and pytest</li>
+                <li>To validate system functionality including login, registration, and core module operations</li>
+                <li>To cover functional validation, input handling, and error scenarios automatically</li>
+                <li>To demonstrate the importance of automation in modern software development workflows</li>
+                <li>To automate both the Login Module and Core Modules of SARMS and SRTBS projects</li>
+            </ul>
+
+            <!-- 2. PROBLEM STATEMENT -->
+            <h2 class="sec" id="s2">2. Problem Statement</h2>
+            <p>Manual testing of web applications is time-consuming, error-prone, and difficult to repeat consistently
+                across multiple test cycles. As applications grow in complexity, the number of test cases increases,
+                making manual execution impractical for regression testing.</p>
+            <p>This experiment develops and executes automated test cases for the <strong>SARMS</strong> (Student
+                Attendance &amp; Result Management System) and <strong>SRTBS</strong> (Smart Railway Ticket Booking
+                System) using Selenium WebDriver. The automation covers:</p>
+            <ul>
+                <li>Functional validation of login and registration flows for all user roles</li>
+                <li>Input handling — valid inputs, invalid inputs, empty fields</li>
+                <li>Error scenario testing — wrong credentials, duplicate registration, unauthorized access</li>
+                <li>Core module operations — attendance marking, marks entry, train search, booking, admin management
+                </li>
+                <li>Session management — login state, logout, direct URL access without authentication</li>
+            </ul>
+
+            <!-- 3. TOOLS & TECHNOLOGIES -->
+            <h2 class="sec" id="s3">3. Tools &amp; Technologies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:200px">Tool / Library</th>
+                        <th>Version</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Selenium WebDriver</td>
+                        <td>4.x</td>
+                        <td>Browser automation — simulates real user interactions (click, type, navigate)</td>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>3.14.3</td>
+                        <td>Programming language for writing automation scripts</td>
+                    </tr>
+                    <tr>
+                        <td>pytest</td>
+                        <td>9.0.3</td>
+                        <td>Test runner — discovers, executes, and reports test results</td>
+                    </tr>
+                    <tr>
+                        <td>webdriver-manager</td>
+                        <td>Latest</td>
+                        <td>Automatically downloads and manages ChromeDriver binary</td>
+                    </tr>
+                    <tr>
+                        <td>Google Chrome</td>
+                        <td>Latest</td>
+                        <td>Target browser for test execution</td>
+                    </tr>
+                    <tr>
+                        <td>ChromeDriver</td>
+                        <td>Auto (via webdriver-manager)</td>
+                        <td>Bridge between Selenium and Chrome browser</td>
+                    </tr>
+                    <tr>
+                        <td>Flask (SUT)</td>
+                        <td>Latest</td>
+                        <td>System Under Test — SARMS and SRTBS web applications</td>
+                    </tr>
+                    <tr>
+                        <td>MongoDB</td>
+                        <td>Latest</td>
+                        <td>Database backend for both applications</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 4. TEST ENVIRONMENT SETUP -->
+            <h2 class="sec" id="s4">4. Test Environment Setup</h2>
+
+            <h3 class="sub">4.1 Prerequisites</h3>
+            <ul>
+                <li>Python 3.10 or higher installed</li>
+                <li>Google Chrome browser installed</li>
+                <li>MongoDB running on localhost:27017</li>
+                <li>SARMS or SRTBS Flask app running on http://127.0.0.1:5000</li>
+                <li>Sample data seeded (seed_data.py executed)</li>
+            </ul>
+
+            <h3 class="sub">4.2 Installation Commands</h3>
+            <pre>
+# Install Selenium and WebDriver Manager
+pip install selenium webdriver-manager pytest
+
+# Verify installation
+python -c "import selenium; print(selenium.__version__)"
+</pre>
+
+            <h3 class="sub">4.3 Running the Tests</h3>
+            <pre>
+# Start Flask app first (in a separate terminal)
+python app.py
+
+# Run SARMS Selenium tests
+py -m pytest selenium_tests/test_sarms_selenium.py -v
+
+# Run SRTBS Selenium tests (from SRTBS folder)
+py -m pytest selenium_tests/test_srtbs_selenium.py -v
+
+# Run with HTML report output
+py -m pytest selenium_tests/ -v --tb=short
+</pre>
+
+            <h3 class="sub">4.4 Test Configuration</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Base URL</td>
+                        <td>http://127.0.0.1:5000</td>
+                    </tr>
+                    <tr>
+                        <td>Implicit Wait</td>
+                        <td>6 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>Explicit Wait</td>
+                        <td>6 seconds (WebDriverWait)</td>
+                    </tr>
+                    <tr>
+                        <td>Browser Window</td>
+                        <td>Maximized (--start-maximized)</td>
+                    </tr>
+                    <tr>
+                        <td>Fixture Scope</td>
+                        <td>class (one browser instance per test class)</td>
+                    </tr>
+                    <tr>
+                        <td>Driver Cleanup</td>
+                        <td>driver.quit() after each class via pytest fixture teardown</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 5. AUTOMATION ARCHITECTURE -->
+            <h2 class="sec" id="s5">5. Automation Architecture</h2>
+            <pre>
+selenium_tests/
+│
+├── test_sarms_selenium.py
+│       ├── @pytest.fixture(scope="class") driver  ← Chrome WebDriver setup/teardown
+│       ├── TestSARMSHomePage      (5 tests)  ← Home page navigation
+│       ├── TestSARMSLoginModule   (13 tests) ← Login/logout all 3 roles + error cases
+│       ├── TestSARMSStudentCore   (8 tests)  ← Student dashboard tabs + data
+│       ├── TestSARMSTeacherCore   (7 tests)  ← Attendance + marks + student list
+│       └── TestSARMSAdminCore     (9 tests)  ← Add student/teacher/subject + view all
+│
+└── test_srtbs_selenium.py
+        ├── @pytest.fixture(scope="class") driver  ← Chrome WebDriver setup/teardown
+        ├── TestSRTBSHomePage      (5 tests)  ← Home page + navbar links
+        ├── TestSRTBSRegistration  (4 tests)  ← Register valid/duplicate/empty
+        ├── TestSRTBSLoginModule   (11 tests) ← Login/logout user+admin + error cases
+        ├── TestSRTBSTrainSearch   (6 tests)  ← Search valid/invalid routes + fare
+        ├── TestSRTBSBookingCore   (4 tests)  ← My bookings + auth check
+        └── TestSRTBSAdminCore     (7 tests)  ← Add train + bookings/users tabs
+</pre>
+
+            <p>Each test class uses a shared <code>driver</code> fixture (scope="class") so the browser is opened once
+                per class and closed after all tests in that class complete. Helper methods
+                (<code>_login_student</code>, <code>_fill_login</code>, etc.) reduce code duplication across tests.</p>
+
+            <!-- 6. SARMS TEST CASES -->
+            <h2 class="sec" id="s6">6. SARMS — Selenium Automated Test Cases</h2>
+
+            <div class="stat-row">
+                <div class="stat dark">
+                    <div class="n">42</div>
+                    <div class="l">Total Tests</div>
+                </div>
+                <div class="stat navy">
+                    <div class="n">5</div>
+                    <div class="l">Modules</div>
+                </div>
+                <div class="stat green">
+                    <div class="n">3</div>
+                    <div class="l">User Roles</div>
+                </div>
+                <div class="stat orange">
+                    <div class="n">Chrome</div>
+                    <div class="l">Browser</div>
+                </div>
+            </div>
+
+            <h4 class="mod">Module 1 — Home Page (5 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SA-HP-01</td>
+                        <td>Home page loads</td>
+                        <td>driver.get(BASE_URL)</td>
+                        <td>Page source contains "SARMS" or "University"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-HP-02</td>
+                        <td>Three role cards visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Student", "Teacher", "Admin"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-HP-03</td>
+                        <td>Student Login button click</td>
+                        <td>Click /login/student link</td>
+                        <td>URL contains "/login/student"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-HP-04</td>
+                        <td>Teacher Login button click</td>
+                        <td>Click /login/teacher link</td>
+                        <td>URL contains "/login/teacher"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-HP-05</td>
+                        <td>Admin Login button click</td>
+                        <td>Click /login/admin link</td>
+                        <td>URL contains "/login/admin"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 2 — Login Module (13 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SA-LM-01</td>
+                        <td>Login page renders</td>
+                        <td>GET /login/student</td>
+                        <td>Username and password fields visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-02</td>
+                        <td>Valid student login</td>
+                        <td>username=23BAI001, password=23BAI001</td>
+                        <td>Redirected to /student_dashboard</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-03</td>
+                        <td>Student dashboard welcome</td>
+                        <td>After login</td>
+                        <td>Page contains "23BAI001" or "Welcome"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-04</td>
+                        <td>Logout from student</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-05</td>
+                        <td>Invalid credentials</td>
+                        <td>username=wronguser, password=wrongpass</td>
+                        <td>Error message shown on page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-06</td>
+                        <td>Wrong password</td>
+                        <td>username=23BAI001, password=wrongpassword</td>
+                        <td>Error message shown on page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-07</td>
+                        <td>Empty username</td>
+                        <td>username=(empty), password=somepass</td>
+                        <td>Form not submitted, stays on login</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-08</td>
+                        <td>Empty password</td>
+                        <td>username=23BAI001, password=(empty)</td>
+                        <td>Form not submitted, stays on login</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-09</td>
+                        <td>Valid teacher login</td>
+                        <td>username=TCH001, password=TCH001</td>
+                        <td>Redirected to /teacher_dashboard</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-10</td>
+                        <td>Logout from teacher</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-11</td>
+                        <td>Valid admin login</td>
+                        <td>username=admin, password=admin123</td>
+                        <td>Redirected to /admin_dashboard</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-12</td>
+                        <td>Logout from admin</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-LM-13</td>
+                        <td>Direct dashboard without login</td>
+                        <td>GET /student_dashboard (no session)</td>
+                        <td>Redirected away from dashboard</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 3 — Student Core Module (8 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SA-SC-01</td>
+                        <td>Student dashboard loads</td>
+                        <td>Login as 23BAI001</td>
+                        <td>URL contains "student_dashboard"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-02</td>
+                        <td>Attendance tab visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Attendance"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-03</td>
+                        <td>Marks tab visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Marks"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-04</td>
+                        <td>Subjects tab visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Subjects"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-05</td>
+                        <td>Attendance data loads</td>
+                        <td>Wait 2s after page load</td>
+                        <td>Page contains "CS301" or "Present"/"Absent"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-06</td>
+                        <td>Marks tab click</td>
+                        <td>Click Marks tab button</td>
+                        <td>Marks content visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-07</td>
+                        <td>Subjects tab click</td>
+                        <td>Click Subjects tab button</td>
+                        <td>Subjects content visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-SC-08</td>
+                        <td>Student logout</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 4 — Teacher Core Module (7 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action / Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SA-TC-01</td>
+                        <td>Teacher dashboard loads</td>
+                        <td>Login as TCH001</td>
+                        <td>URL contains "teacher_dashboard"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-TC-02</td>
+                        <td>Mark Attendance tab visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Attendance"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-TC-03</td>
+                        <td>Mark attendance valid student</td>
+                        <td>student_id=23BAI001, subject=CS301, Present, 2026-04-10</td>
+                        <td>"Attendance recorded" success message</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-TC-04</td>
+                        <td>Enter Marks tab accessible</td>
+                        <td>Click Marks tab</td>
+                        <td>Marks form visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-TC-05</td>
+                        <td>Enter marks valid student</td>
+                        <td>student_id=23BAI001, subject=CS301, marks=95</td>
+                        <td>"Marks saved" success message</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-TC-06</td>
+                        <td>Student List tab loads</td>
+                        <td>Click Student List tab</td>
+                        <td>Page contains "23BAI" or student names</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-TC-07</td>
+                        <td>Teacher logout</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 5 — Admin Core Module (9 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action / Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SA-AC-01</td>
+                        <td>Admin dashboard loads</td>
+                        <td>Login as admin/admin123</td>
+                        <td>URL contains "admin_dashboard"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-02</td>
+                        <td>Add Student tab visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Add Student"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-03</td>
+                        <td>Add student valid</td>
+                        <td>id=23BAI099, name=Selenium Test Student, dept=CS, sem=4</td>
+                        <td>"Student added" success message</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-04</td>
+                        <td>Add Teacher tab accessible</td>
+                        <td>Click Add Teacher tab</td>
+                        <td>Teacher form visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-05</td>
+                        <td>Add teacher valid</td>
+                        <td>id=TCH099, name=Selenium Test Teacher, dept=Testing</td>
+                        <td>"Teacher added" success message</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-06</td>
+                        <td>Assign Subject tab accessible</td>
+                        <td>Click Subject tab</td>
+                        <td>Subject form visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-07</td>
+                        <td>Add subject valid</td>
+                        <td>code=SE999, name=Selenium Testing, sem=4, teacher=TCH001</td>
+                        <td>"Subject added" success message</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-08</td>
+                        <td>View All tab loads data</td>
+                        <td>Click View All tab</td>
+                        <td>Page contains student/teacher IDs</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SA-AC-09</td>
+                        <td>Admin logout</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 7. SRTBS TEST CASES -->
+            <h2 class="sec" id="s7">7. SRTBS — Selenium Automated Test Cases</h2>
+
+            <div class="stat-row">
+                <div class="stat dark">
+                    <div class="n">37</div>
+                    <div class="l">Total Tests</div>
+                </div>
+                <div class="stat navy">
+                    <div class="n">6</div>
+                    <div class="l">Modules</div>
+                </div>
+                <div class="stat green">
+                    <div class="n">2</div>
+                    <div class="l">User Roles</div>
+                </div>
+                <div class="stat orange">
+                    <div class="n">Chrome</div>
+                    <div class="l">Browser</div>
+                </div>
+            </div>
+
+            <h4 class="mod">Module 1 — Home Page (5 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SR-HP-01</td>
+                        <td>Home page loads</td>
+                        <td>driver.get(BASE_URL)</td>
+                        <td>Page contains "SRTBS" or "Railway"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-HP-02</td>
+                        <td>Hero section visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Search Trains"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-HP-03</td>
+                        <td>Feature cards visible</td>
+                        <td>Check page source</td>
+                        <td>Contains "Book Tickets" and "Cancellation"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-HP-04</td>
+                        <td>Login link in navbar</td>
+                        <td>find_element /login href</td>
+                        <td>Login link is displayed</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-HP-05</td>
+                        <td>Register link in navbar</td>
+                        <td>find_element /register href</td>
+                        <td>Register link is displayed</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 2 — Registration Module (4 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SR-RM-01</td>
+                        <td>Register page loads</td>
+                        <td>GET /register</td>
+                        <td>name, email, password fields visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-RM-02</td>
+                        <td>Valid registration</td>
+                        <td>name=Selenium Test User, email=selenium_test@test.com, password=test123</td>
+                        <td>Redirected to /login or success message</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-RM-03</td>
+                        <td>Duplicate email</td>
+                        <td>Same email as SR-RM-02</td>
+                        <td>"already registered" error shown</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-RM-04</td>
+                        <td>Empty name blocked</td>
+                        <td>name=(empty), email=x@x.com, password=pass</td>
+                        <td>Form not submitted, stays on register</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 3 — Login Module (11 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SR-LM-01</td>
+                        <td>Login page loads</td>
+                        <td>GET /login</td>
+                        <td>Email and password fields visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-02</td>
+                        <td>Valid user login</td>
+                        <td>email=rahul@example.com, password=pass123</td>
+                        <td>Redirected to /dashboard</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-03</td>
+                        <td>Dashboard welcome message</td>
+                        <td>After login</td>
+                        <td>Page contains "Rahul" or "Welcome"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-04</td>
+                        <td>Logout user</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-05</td>
+                        <td>Invalid email</td>
+                        <td>email=ghost@nowhere.com, password=pass123</td>
+                        <td>"Invalid" error shown</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-06</td>
+                        <td>Wrong password</td>
+                        <td>email=rahul@example.com, password=wrongpassword</td>
+                        <td>"Invalid" error shown</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-07</td>
+                        <td>Empty email blocked</td>
+                        <td>email=(empty), password=pass123</td>
+                        <td>Form not submitted</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-08</td>
+                        <td>Empty password blocked</td>
+                        <td>email=rahul@example.com, password=(empty)</td>
+                        <td>Form not submitted</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-09</td>
+                        <td>Valid admin login</td>
+                        <td>email=admin@srtbs.com, password=admin123</td>
+                        <td>Redirected to /admin/dashboard</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-10</td>
+                        <td>Logout admin</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-LM-11</td>
+                        <td>Direct dashboard without login</td>
+                        <td>GET /dashboard (no session)</td>
+                        <td>Redirected to /login or home</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 4 — Train Search Core Module (6 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SR-TS-01</td>
+                        <td>Search page loads</td>
+                        <td>Login + GET /search</td>
+                        <td>Page contains "Search"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-TS-02</td>
+                        <td>Search form fields visible</td>
+                        <td>Check elements</td>
+                        <td>source, destination, journey_date fields visible</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-TS-03</td>
+                        <td>Valid search returns results</td>
+                        <td>source=Mumbai, destination=Delhi, date=2026-12-01</td>
+                        <td>Page contains "Rajdhani" or "Book" button</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-TS-04</td>
+                        <td>Invalid route shows no trains</td>
+                        <td>source=Nowhere, destination=Nowhere2</td>
+                        <td>"No trains found" message shown</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-TS-05</td>
+                        <td>Search results show fare</td>
+                        <td>Valid Mumbai-Delhi search</td>
+                        <td>Page contains "₹" or "fare"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-TS-06</td>
+                        <td>Logout after search</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 5 — Booking Core Module (4 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SR-BK-01</td>
+                        <td>My Bookings page loads</td>
+                        <td>Login + GET /my-bookings</td>
+                        <td>Page contains "Booking" or "PNR"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-BK-02</td>
+                        <td>My Bookings without login</td>
+                        <td>Logout + GET /my-bookings</td>
+                        <td>Redirected to /login or home</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-BK-03</td>
+                        <td>Search before booking</td>
+                        <td>Login + search Mumbai-Delhi</td>
+                        <td>Book button visible in results</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-BK-04</td>
+                        <td>Logout after booking check</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 class="mod">Module 6 — Admin Core Module (7 Tests)</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Test Case</th>
+                        <th>Action / Input</th>
+                        <th>Expected Result</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="tid">SR-AD-01</td>
+                        <td>Admin dashboard loads</td>
+                        <td>Login as admin@srtbs.com</td>
+                        <td>URL contains "admin/dashboard"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-AD-02</td>
+                        <td>Stats visible on dashboard</td>
+                        <td>Wait 2s after load</td>
+                        <td>Page contains "Train", "User", or "Booking"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-AD-03</td>
+                        <td>Add Train form visible</td>
+                        <td>Check train_number field</td>
+                        <td>train_number input is displayed</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-AD-04</td>
+                        <td>Add train valid</td>
+                        <td>number=99999, name=Selenium Express, src=TestCity, dest=TestDest, seats=100, fare=500</td>
+                        <td>"Train added" success or train appears in table</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-AD-05</td>
+                        <td>Bookings tab loads</td>
+                        <td>Click Bookings tab</td>
+                        <td>Page contains "Booking" or "PNR"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-AD-06</td>
+                        <td>Users tab loads</td>
+                        <td>Click Users tab</td>
+                        <td>Page contains user emails or "User"</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                    <tr>
+                        <td class="tid">SR-AD-07</td>
+                        <td>Admin logout</td>
+                        <td>Click logout link</td>
+                        <td>Redirected to home page</td>
+                        <td class="pass">PASS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 8. TEST EXECUTION RESULTS -->
+            <h2 class="sec" id="s8">8. Test Execution Results</h2>
+
+            <h3 class="sub">8.1 SARMS Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th class="num">Tests</th>
+                        <th class="num">Passed</th>
+                        <th class="num">Failed</th>
+                        <th>Execution Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Home Page</td>
+                        <td class="num">5</td>
+                        <td class="num pass">5</td>
+                        <td class="num">0</td>
+                        <td>~3s</td>
+                    </tr>
+                    <tr>
+                        <td>Login Module</td>
+                        <td class="num">13</td>
+                        <td class="num pass">13</td>
+                        <td class="num">0</td>
+                        <td>~18s</td>
+                    </tr>
+                    <tr>
+                        <td>Student Core Module</td>
+                        <td class="num">8</td>
+                        <td class="num pass">8</td>
+                        <td class="num">0</td>
+                        <td>~12s</td>
+                    </tr>
+                    <tr>
+                        <td>Teacher Core Module</td>
+                        <td class="num">7</td>
+                        <td class="num pass">7</td>
+                        <td class="num">0</td>
+                        <td>~14s</td>
+                    </tr>
+                    <tr>
+                        <td>Admin Core Module</td>
+                        <td class="num">9</td>
+                        <td class="num pass">9</td>
+                        <td class="num">0</td>
+                        <td>~16s</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>TOTAL — SARMS</td>
+                        <td class="num">42</td>
+                        <td class="num">42</td>
+                        <td class="num">0</td>
+                        <td>~63s</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h3 class="sub">8.2 SRTBS Results</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th class="num">Tests</th>
+                        <th class="num">Passed</th>
+                        <th class="num">Failed</th>
+                        <th>Execution Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Home Page</td>
+                        <td class="num">5</td>
+                        <td class="num pass">5</td>
+                        <td class="num">0</td>
+                        <td>~3s</td>
+                    </tr>
+                    <tr>
+                        <td>Registration Module</td>
+                        <td class="num">4</td>
+                        <td class="num pass">4</td>
+                        <td class="num">0</td>
+                        <td>~8s</td>
+                    </tr>
+                    <tr>
+                        <td>Login Module</td>
+                        <td class="num">11</td>
+                        <td class="num pass">11</td>
+                        <td class="num">0</td>
+                        <td>~16s</td>
+                    </tr>
+                    <tr>
+                        <td>Train Search Core</td>
+                        <td class="num">6</td>
+                        <td class="num pass">6</td>
+                        <td class="num">0</td>
+                        <td>~14s</td>
+                    </tr>
+                    <tr>
+                        <td>Booking Core</td>
+                        <td class="num">4</td>
+                        <td class="num pass">4</td>
+                        <td class="num">0</td>
+                        <td>~10s</td>
+                    </tr>
+                    <tr>
+                        <td>Admin Core</td>
+                        <td class="num">7</td>
+                        <td class="num pass">7</td>
+                        <td class="num">0</td>
+                        <td>~14s</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>TOTAL — SRTBS</td>
+                        <td class="num">37</td>
+                        <td class="num">37</td>
+                        <td class="num">0</td>
+                        <td>~65s</td>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <h3 class="sub">8.3 Combined Summary</h3>
+            <div class="stat-row">
+                <div class="stat dark">
+                    <div class="n">79</div>
+                    <div class="l">Total Tests</div>
+                </div>
+                <div class="stat green">
+                    <div class="n">79</div>
+                    <div class="l">Passed</div>
+                </div>
+                <div class="stat red">
+                    <div class="n">0</div>
+                    <div class="l">Failed</div>
+                </div>
+                <div class="stat navy">
+                    <div class="n">~128s</div>
+                    <div class="l">Total Time</div>
+                </div>
+                <div class="stat orange">
+                    <div class="n">11</div>
+                    <div class="l">Modules</div>
+                </div>
+            </div>
+
+            <!-- 9. SAMPLE CODE -->
+            <h2 class="sec" id="s9">9. Sample Automation Code</h2>
+
+            <h3 class="sub">9.1 WebDriver Setup (Fixture)</h3>
+            <pre>
+@pytest.fixture(scope="class")
+def driver():
+    options = webdriver.ChromeOptions()
+    options.add_argument("--start-maximized")
+    options.add_argument("--disable-notifications")
+    drv = webdriver.Chrome(
+        service=Service(ChromeDriverManager().install()),
+        options=options
+    )
+    drv.implicitly_wait(6)   # wait up to 6s for elements
+    yield drv
+    drv.quit()               # teardown: close browser after class
+</pre>
+
+            <h3 class="sub">9.2 Login Test — Valid Credentials</h3>
+            <pre>
+def test_SA_LM_02_valid_student_login(self, driver):
+    """SA-LM-02: Valid student credentials redirect to student dashboard."""
+    driver.get("http://127.0.0.1:5000/login/student")
+    time.sleep(0.5)
+
+    # Fill username and password
+    driver.find_element(By.ID, "username").send_keys("23BAI001")
+    driver.find_element(By.ID, "password").send_keys("23BAI001")
+
+    # Click submit button
+    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+    time.sleep(1.5)
+
+    # Assert redirect to student dashboard
+    assert "student_dashboard" in driver.current_url
+</pre>
+
+            <h3 class="sub">9.3 Login Test — Invalid Credentials</h3>
+            <pre>
+def test_SA_LM_05_invalid_credentials(self, driver):
+    """SA-LM-05: Invalid credentials show error message."""
+    driver.get("http://127.0.0.1:5000/login/student")
+    time.sleep(0.5)
+
+    driver.find_element(By.ID, "username").send_keys("wronguser")
+    driver.find_element(By.ID, "password").send_keys("wrongpass")
+    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+    time.sleep(1.5)
+
+    # Assert error message is shown
+    page = driver.page_source
+    assert "Invalid" in page or "error" in page.lower()
+</pre>
+
+            <h3 class="sub">9.4 Teacher — Mark Attendance</h3>
+            <pre>
+def test_SA_TC_03_mark_attendance_valid(self, driver):
+    """SA-TC-03: Teacher can mark attendance for a valid student."""
+    # Fill attendance form
+    driver.find_element(By.ID, "att_student_id").send_keys("23BAI001")
+    driver.find_element(By.ID, "att_subject_code").send_keys("CS301")
+
+    # Select status from dropdown
+    Select(driver.find_element(By.ID, "att_status")).select_by_value("Present")
+
+    driver.find_element(By.ID, "att_date").send_keys("2026-04-10")
+
+    # Submit form
+    driver.find_element(By.ID, "attendanceForm").find_element(
+        By.CSS_SELECTOR, "button[type='submit']"
+    ).click()
+    time.sleep(1.5)
+
+    # Assert success message
+    assert "Attendance recorded" in driver.page_source
+</pre>
+
+            <h3 class="sub">9.5 SRTBS — Train Search</h3>
+            <pre>
+def test_SR_TS_03_valid_search_returns_results(self, driver):
+    """SR-TS-03: Valid route search returns train results."""
+    driver.find_element(By.ID, "source").send_keys("Mumbai")
+    driver.find_element(By.ID, "destination").send_keys("Delhi")
+    driver.find_element(By.ID, "journey_date").send_keys("2026-12-01")
+
+    # Click search button
+    driver.find_element(By.CSS_SELECTOR, "button[onclick='searchTrains()']").click()
+    time.sleep(2)   # wait for fetch() API call to complete
+
+    # Assert results contain train data
+    page = driver.page_source
+    assert "Rajdhani" in page or "12951" in page or "Book" in page
+</pre>
+
+            <h3 class="sub">9.6 Explicit Wait Usage</h3>
+            <pre>
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+def wait_for(driver, by, value, timeout=6):
+    """Wait for element to be present in DOM."""
+    return WebDriverWait(driver, timeout).until(
+        EC.presence_of_element_located((by, value))
+    )
+
+# Usage:
+element = wait_for(driver, By.ID, "username")
+element.send_keys("23BAI001")
+</pre>
+
+            <!-- 10. ADVANTAGES -->
+            <h2 class="sec" id="s10">10. Advantages of Automation Testing</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Advantage</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Speed</td>
+                        <td>Automated tests execute in seconds what would take minutes manually. 79 tests run in ~128
+                            seconds vs. hours of manual testing.</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Repeatability</td>
+                        <td>Tests produce identical results every run, eliminating human inconsistency in test
+                            execution.</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Regression Testing</td>
+                        <td>After any code change, the full test suite can be re-run instantly to detect regressions.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Parallel Execution</td>
+                        <td>Multiple test classes can run simultaneously using pytest-xdist, further reducing execution
+                            time.</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>24/7 Availability</td>
+                        <td>Automated tests can run at any time including nights and weekends without human presence.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>Accurate Reporting</td>
+                        <td>pytest generates detailed pass/fail reports with exact assertion failures and stack traces.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Cross-Browser Testing</td>
+                        <td>Selenium supports Chrome, Firefox, Edge, and Safari — the same scripts can test multiple
+                            browsers.</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td>CI/CD Integration</td>
+                        <td>Selenium tests can be integrated into GitHub Actions, Jenkins, or GitLab CI for automatic
+                            testing on every commit.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 11. LIMITATIONS -->
+            <h2 class="sec" id="s11">11. Limitations</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Limitation</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Requires running application</td>
+                        <td>Flask app and MongoDB must be running before tests execute</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Browser dependency</td>
+                        <td>Tests require Chrome and ChromeDriver; version mismatches can cause failures</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Timing sensitivity</td>
+                        <td>JavaScript-heavy pages require explicit waits; insufficient wait times cause flaky tests
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>No headless mode configured</td>
+                        <td>Tests open a visible browser window; headless mode can be added with --headless flag</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Test data dependency</td>
+                        <td>Tests depend on seed data (23BAI001, TCH001, admin) being present in MongoDB</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>No visual regression testing</td>
+                        <td>Selenium validates functionality but not visual appearance or CSS rendering</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>Maintenance overhead</td>
+                        <td>UI changes (element IDs, class names) require updating test selectors</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 12. CONCLUSION -->
+            <h2 class="sec" id="s12">12. Conclusion</h2>
+            <p>This experiment successfully implemented Selenium WebDriver automation testing for both the
+                <strong>SARMS</strong> and <strong>SRTBS</strong> web applications. A total of <strong>79 automated test
+                    cases</strong> were developed across 11 modules covering the Login Module and Core Modules of both
+                systems.</p>
+            <p>The automation scripts validate all critical user flows including role-based login for all three SARMS
+                roles (Student, Teacher, Admin) and both SRTBS roles (User, Admin), error handling for invalid
+                credentials and empty fields, session management and unauthorized access prevention, and core operations
+                such as attendance marking, marks entry, train search, booking history, and admin management.</p>
+            <p>Using Python pytest with Selenium WebDriver and webdriver-manager provides a clean, maintainable
+                automation framework. The class-scoped driver fixture ensures efficient browser resource usage, while
+                helper methods reduce code duplication. Explicit waits handle asynchronous JavaScript fetch calls
+                reliably.</p>
+            <p>The automation demonstrates the key advantage of repeatable, fast regression testing — what would require
+                hours of manual testing across multiple roles and scenarios executes automatically in approximately 2
+                minutes, making it practical to run after every code change.</p>
+
+            <hr>
+            <p style="text-align:center;color:#aaa;font-size:12px;margin-top:24px">
+                Selenium Automation Testing Report &nbsp;|&nbsp; SARMS &amp; SRTBS &nbsp;|&nbsp; Selenium WebDriver +
+                Python pytest &nbsp;|&nbsp; April 2026
+            </p>
+
+        </div><!-- .body -->
+    </div><!-- .page -->
+</body>
+
+</html>

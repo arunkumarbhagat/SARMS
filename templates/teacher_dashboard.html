@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard - SARMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-dark bg-success px-4 d-flex justify-content-between">
+        <span class="navbar-brand fw-bold">👨‍🏫 Teacher Dashboard</span>
+        <div>
+            <span class="text-white me-3">Welcome, {{ user }}</span>
+            <a href="/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+
+        <ul class="nav nav-tabs mb-4">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#markAttendance">Mark
+                    Attendance</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#enterMarks">Enter Marks</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#studentList">Student List</button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- Mark Attendance -->
+            <div class="tab-pane fade show active" id="markAttendance">
+                <div class="card shadow-sm" style="max-width:500px">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Mark Attendance</h5>
+                        <div id="attMsg"></div>
+                        <form id="attendanceForm">
+                            <div class="mb-3">
+                                <label class="form-label">Student ID</label>
+                                <input type="text" id="att_student_id" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Subject Code</label>
+                                <input type="text" id="att_subject_code" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select id="att_status" class="form-select">
+                                    <option value="Present">Present</option>
+                                    <option value="Absent">Absent</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Date</label>
+                                <input type="date" id="att_date" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Submit Attendance</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enter Marks -->
+            <div class="tab-pane fade" id="enterMarks">
+                <div class="card shadow-sm" style="max-width:500px">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3">Enter Marks</h5>
+                        <div id="marksMsg"></div>
+                        <form id="marksForm">
+                            <div class="mb-3">
+                                <label class="form-label">Student ID</label>
+                                <input type="text" id="m_student_id" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Subject Code</label>
+                                <input type="text" id="m_subject_code" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Marks</label>
+                                <input type="number" id="m_marks" class="form-control" min="0" max="100" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Save Marks</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Student List -->
+            <div class="tab-pane fade" id="studentList">
+                <h5 class="mb-3">All Students</h5>
+                <table class="table table-bordered table-hover bg-white">
+                    <thead class="table-success">
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Name</th>
+                            <th>Department</th>
+                            <th>Semester</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentsBody">
+                        <tr>
+                            <td colspan="4" class="text-center text-muted">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Load students on tab click
+        document.querySelector('[data-bs-target="#studentList"]').addEventListener('shown.bs.tab', loadStudents);
+
+        async function loadStudents() {
+            const res = await fetch("/teacher/students");
+            const data = await res.json();
+            const body = document.getElementById("studentsBody");
+            body.innerHTML = data.length
+                ? data.map(s => `<tr><td>${s.student_id}</td><td>${s.name}</td><td>${s.department}</td><td>${s.semester}</td></tr>`).join("")
+                : `<tr><td colspan="4" class="text-center text-muted">No students found</td></tr>`;
+        }
+
+        function showMsg(id, msg, success) {
+            const el = document.getElementById(id);
+            el.innerHTML = `<div class="alert alert-${success ? 'success' : 'danger'}">${msg}</div>`;
+            setTimeout(() => el.innerHTML = "", 3000);
+        }
+
+        document.getElementById("attendanceForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const res = await fetch("/teacher/mark_attendance", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    student_id: document.getElementById("att_student_id").value,
+                    subject_code: document.getElementById("att_subject_code").value,
+                    status: document.getElementById("att_status").value,
+                    date: document.getElementById("att_date").value
+                })
+            });
+            const data = await res.json();
+            showMsg("attMsg", res.ok ? data.message : data.error, res.ok);
+            if (res.ok) this.reset();
+        });
+
+        document.getElementById("marksForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const res = await fetch("/teacher/enter_marks", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    student_id: document.getElementById("m_student_id").value,
+                    subject_code: document.getElementById("m_subject_code").value,
+                    marks: document.getElementById("m_marks").value
+                })
+            });
+            const data = await res.json();
+            showMsg("marksMsg", res.ok ? data.message : data.error, res.ok);
+            if (res.ok) this.reset();
+        });
+    </script>
+
+</body>
+
+</html>

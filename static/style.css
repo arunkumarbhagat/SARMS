@@ -1,0 +1,20 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.navbar-brand {
+    font-size: 1.3rem;
+}
+
+.nav-tabs .nav-link {
+    color: #555;
+}
+
+.nav-tabs .nav-link.active {
+    font-weight: 600;
+}
